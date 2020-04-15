@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InsertActivity">
+
+    <FrameLayout
+        android:id="@+id/frameTitle"
+        android:layout_width="407dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameKor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="20dp"
+            android:text="문장등록"
+            android:textColor="#01534C"
+            android:textSize="30sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameKor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameEng"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameTitle">
+
+        <TextView
+            android:id="@+id/textViewKorTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[Q]"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editTextKor"
+            android:layout_width="match_parent"
+            android:layout_height="176dp"
+            android:layout_marginTop="35dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameEng"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/frameButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameKor">
+
+        <TextView
+            android:id="@+id/textViewEng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[A]"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editTextEng"
+            android:layout_width="match_parent"
+            android:layout_height="177dp"
+            android:layout_marginTop="35dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameButton"
+        android:layout_width="407dp"
+        android:layout_height="176dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameEng">
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="100dp"
+            android:text="저장" />
+
+        <TextView
+            android:id="@+id/textViewStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="85dp"
+            android:layout_marginTop="10dp"
+            android:text="YYYY/MM/DD"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textViewEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="290dp"
+            android:layout_marginTop="10dp"
+            android:text="YYYY/MM/DD"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/buttonTime"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="알림"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="85dp"
+            android:layout_marginTop="60dp"
+            android:text="HH:MM"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/buttonStartDate"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="시작" />
+
+        <Button
+            android:id="@+id/buttonEndDate"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="205dp"
+            android:text="종료" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
