@@ -49,9 +49,17 @@
             android:id="@+id/textViewVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="340dp"
-            android:text="v.2020.04.16" />
+            android:text="v.2020.04.17"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textViewNotiTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:text="HH:MM / 10"
+            android:visibility="visible" />
+
     </FrameLayout>
 
     <FrameLayout

@@ -16,8 +16,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnInsert;
     Button btnShow;
     Button btnTestNoti;
+    TextView txtNotiTime;
 
     NotificationManager notificationManager;
     NotificationCompat.Builder builder;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = (Button) findViewById(R.id.buttonInsert);
         btnShow = (Button) findViewById(R.id.buttonVeiwAll);
         btnTestNoti = (Button) findViewById(R.id.buttonNoti);
+        txtNotiTime = (TextView) findViewById(R.id.textViewNotiTime);
         OpenInsertActivity();
         OpenShowSentenceActivity();
         TestNoti();
@@ -55,12 +60,28 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Log.d("timer: %d", String.valueOf(counter));
                 counter++;
-                LoadSentenceForNoti();
+
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Calendar cal = new GregorianCalendar();
+
+                                txtNotiTime.setText(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + "/ counter: " + String.valueOf(counter));
+
+                                LoadSentenceForNoti();
+                            }
+                        });
+                    }
+                }).start();
+
             }
         };
 
         Timer timer = new Timer();
-        timer.schedule(timerTask, 0, 600000);
+        timer.schedule(timerTask, 0, 480000);
 
     }
 
@@ -110,18 +131,15 @@ public class MainActivity extends AppCompatActivity {
     public void LoadSentenceForNoti() {
         Cursor res = myDb.getNotiData();
         if(res.getCount() == 0) {
+            //showMessage("None","조회내용이 없습니다.");
             return ;
         }
 
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()) {
-            //buffer.append("Kor: " + res.getString(1) + "\n");
-            //buffer.append("Eng: " + res.getString(2) + "\n");
+            //showMessage("Found",res.getString(1));
             showNotification(res.getString(0), res.getString(1), res.getString(2));
         }
-
-
-        //showMessage("Get Data", buffer.toString());
 
     }
 
