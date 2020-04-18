@@ -37,7 +37,7 @@ public class ContactDBctrl {
 
     //현재 시간 기준 popup_time 10분 이내의 것들을 조회
     public static final String SQL_SELECT_NOTI_DATA = "SELECT ID, KOR_SENTENCE, ENG_SENTENCE, START_DATE, END_DATE, POPUP_TIME, IFNULL(SUCCESS_COUNT,'0'), IFNULL(FAIL_COUNT,'0'), IFNULL(SKIP_COUNT,'0') FROM " + TABLE_NAME +
-            " WHERE (strftime('%H','now','localtime')*60 + strftime('%M','now','localtime')) - (strftime('%H'," + COL_6 + ")*60 + strftime('%M'," + COL_6 + ")) BETWEEN 0 AND 10";
+            " WHERE (strftime('%H','now','localtime')*60 + strftime('%M','now','localtime')) - (strftime('%H'," + COL_6 + ")*60 + strftime('%M'," + COL_6 + ")) BETWEEN 0 AND 10 ORDER BY POPUP_TIME ASC";
 
     // SELECT * FROM CONTACT_T
     //public static final String SQL_SELECT_TB_MYSENTENCE = "SELECT * FROM " + TABLE_NAME ;
