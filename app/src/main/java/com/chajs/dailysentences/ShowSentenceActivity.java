@@ -35,6 +35,8 @@ public class ShowSentenceActivity extends AppCompatActivity {
         viewAll();
         close();
 
+        Intent intent = getIntent();
+
         onNewIntent(getIntent());
     }
 
@@ -49,14 +51,16 @@ public class ShowSentenceActivity extends AppCompatActivity {
 
     private void processIntent(Intent intent) {
         Log.d(TAG,"processIntent: ");
-        if(intent.getStringExtra("id") != null) {
-            id = intent.getExtras().getString("id").toString();
+        Sentence sentence = (Sentence)intent.getSerializableExtra("sentence");
+
+        if(sentence.getId() != null) {
+            id = sentence.getId();
         }
-        if(intent.getStringExtra("kor") != null) {
-            txtKorSentence.setText(intent.getExtras().getString("kor").toString());
+        if(sentence.getKorSentence() != null) {
+            txtKorSentence.setText(sentence.getKorSentence());
         }
-        if(intent.getStringExtra("eng") != null) {
-            txtEngSentence.setText(intent.getExtras().getString("eng").toString());
+        if(sentence.getEngSentence() != null) {
+            txtEngSentence.setText(sentence.getEngSentence());
         }
     }
 

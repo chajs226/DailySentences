@@ -8,7 +8,6 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
@@ -17,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -28,10 +26,12 @@ public class MainActivity extends AppCompatActivity {
 
     static int counter=0;
     DatabaseHelper myDb = null;
+    Sentence sentence;
 
     Button btnInsert;
     Button btnShow;
     Button btnTestNoti;
+    Button btnList;
     TextView txtNotiTime;
 
     NotificationManager notificationManager;
@@ -50,9 +50,12 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = (Button) findViewById(R.id.buttonInsert);
         btnShow = (Button) findViewById(R.id.buttonVeiwAll);
         btnTestNoti = (Button) findViewById(R.id.buttonNoti);
+        btnList = (Button) findViewById(R.id.buttonLoadList);
         txtNotiTime = (TextView) findViewById(R.id.textViewNotiTime);
+
         OpenInsertActivity();
         OpenShowSentenceActivity();
+        OpenListActivity();
         TestNoti();
 
         TimerTask timerTask = new TimerTask() {
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         Timer timer = new Timer();
-        timer.schedule(timerTask, 0, 480000);
+        timer.schedule(timerTask, 0, 540000);
 
     }
 
@@ -96,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    public void showNotification(String id, String kor, String eng) {
+    public void showNotification(Sentence sentence) {
         builder = null;
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         //오레오 버전 이상
@@ -112,13 +115,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, ShowSentenceActivity.class);
-        intent.putExtra("id", id);
-        intent.putExtra("kor", kor);
-        intent.putExtra("eng", eng);
+        intent.putExtra("sentence", sentence);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 101, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         builder.setContentTitle("Daily Practice");
-        builder.setContentText(kor);
+        builder.setContentText(sentence.getKorSentence());
         builder.setSmallIcon(R.drawable.main_pic);
         builder.setAutoCancel(true);
         builder.setContentIntent(pendingIntent);
@@ -137,8 +138,13 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()) {
+            sentence = new Sentence(res.getString(0),
+                    res.getString(1), res.getString(2),
+                    res.getString(3), res.getString(4),
+                    res.getString(5), res.getString(6),
+                    res.getString(7), res.getString(8));
             //showMessage("Found",res.getString(1));
-            showNotification(res.getString(0), res.getString(1), res.getString(2));
+            showNotification(sentence);
         }
 
     }
@@ -161,6 +167,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), ShowSentenceActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+    }
+
+    public void OpenListActivity() {
+        btnList.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                         startActivity(intent);
                     }
                 }

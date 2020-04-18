@@ -22,7 +22,7 @@ import static com.chajs.dailysentences.ContactDBctrl.TABLE_NAME;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Mysentences.db";
-    public static final int DB_VERSION = 2;
+    public static final int DB_VERSION = 3;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
@@ -38,14 +38,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("onCreate After: ","after");
     }
 
-    /*
-    public void CreateTables() {
-        Log.d("CreateTables Before: ","before");
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(ContactDBctrl.SQL_CREATE_TB_MYSENTENCE);
-        Log.d("CreateTables After: ","after");
-    }
-    */
     public boolean CheckExistsTable() {
         SQLiteDatabase db = getWritableDatabase();
         Cursor res = db.rawQuery(ContactDBctrl.SQL_CHECK_EXISTS_TABLE,null);
@@ -57,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL(ContactDBctrl.SQL_DROP_TB_MYSENTENCE);
         onCreate(db);
     }
 
