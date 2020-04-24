@@ -34,10 +34,16 @@ public class ContactDBctrl {
     public static final String SQL_CHECK_EXISTS_TABLE = "SELECT * FROM SQLITE_MASTER WHERE Name = " + TABLE_NAME;
 
     public static final String SQL_SELECT_ALL_DATA = "SELECT ID, KOR_SENTENCE, ENG_SENTENCE, START_DATE, END_DATE, POPUP_TIME, IFNULL(SUCCESS_COUNT,'0'), IFNULL(FAIL_COUNT,'0'), IFNULL(SKIP_COUNT,'0') FROM " + TABLE_NAME;
+    //Noti 시간
+    public static final String SQL_SELECT_NOTI_TIME = "SELECT ID, POPUP_TIME FROM " + TABLE_NAME + " WHERE strftime('%Y/%m/%d', 'now', 'localtime') BETWEEN START_DATE AND END_DATE";
 
     //현재 시간 기준 popup_time 10분 이내의 것들을 조회
     public static final String SQL_SELECT_NOTI_DATA = "SELECT ID, KOR_SENTENCE, ENG_SENTENCE, START_DATE, END_DATE, POPUP_TIME, IFNULL(SUCCESS_COUNT,'0'), IFNULL(FAIL_COUNT,'0'), IFNULL(SKIP_COUNT,'0') FROM " + TABLE_NAME +
             " WHERE (strftime('%H','now','localtime')*60 + strftime('%M','now','localtime')) - (strftime('%H'," + COL_6 + ")*60 + strftime('%M'," + COL_6 + ")) BETWEEN 0 AND 10 ORDER BY POPUP_TIME ASC";
+
+    //ID 로 문장 조회
+    public static final String SQL_SELECT_DATA_FROM_ID = "SELECT ID, KOR_SENTENCE, ENG_SENTENCE, START_DATE, END_DATE, POPUP_TIME, IFNULL(SUCCESS_COUNT,'0'), IFNULL(FAIL_COUNT,'0'), IFNULL(SKIP_COUNT,'0') FROM " + TABLE_NAME +
+            " WHERE ID = ?";
 
     // SELECT * FROM CONTACT_T
     //public static final String SQL_SELECT_TB_MYSENTENCE = "SELECT * FROM " + TABLE_NAME ;

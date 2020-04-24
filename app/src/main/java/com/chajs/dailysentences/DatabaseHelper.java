@@ -77,6 +77,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getNotiTime() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery(ContactDBctrl.SQL_SELECT_NOTI_TIME, null);
+        return res;
+    }
+
+    public Cursor getNotiDataForAlaram(String[] id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery(ContactDBctrl.SQL_SELECT_DATA_FROM_ID, id);
+        return res;
+    }
+
     public Cursor getNotiData() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery(ContactDBctrl.SQL_SELECT_NOTI_DATA, null);

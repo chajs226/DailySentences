@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -16,7 +17,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Timer;
@@ -32,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnShow;
     Button btnTestNoti;
     Button btnList;
+    Button btnAlarmStart;
+    Button btnAlarmStop;
     TextView txtNotiTime;
 
     NotificationManager notificationManager;
@@ -39,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static String CHANNEL_ID = "channel1";
     private static String CHANEL_NAME = "Chaneel1";
+
+
+    private AlarmManager alarmManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,41 +59,82 @@ public class MainActivity extends AppCompatActivity {
         btnShow = (Button) findViewById(R.id.buttonVeiwAll);
         btnTestNoti = (Button) findViewById(R.id.buttonNoti);
         btnList = (Button) findViewById(R.id.buttonLoadList);
+        btnAlarmStart = (Button)findViewById(R.id.buttonAlarmStart);
+        btnAlarmStop = (Button)findViewById(R.id.buttonAlarmStop);
         txtNotiTime = (TextView) findViewById(R.id.textViewNotiTime);
+
+        alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
         OpenInsertActivity();
         OpenShowSentenceActivity();
         OpenListActivity();
         TestNoti();
+        AlarmStart();
+        AlarmStop();
 
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                Log.d("timer: %d", String.valueOf(counter));
-                counter++;
+    }
 
-
-                new Thread(new Runnable() {
+    public void AlarmStart() {
+        btnAlarmStart.setOnClickListener(
+                new View.OnClickListener() {
                     @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                Calendar cal = new GregorianCalendar();
-
-                                txtNotiTime.setText(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + "/ counter: " + String.valueOf(counter));
-
-                                LoadSentenceForNoti();
-                            }
-                        });
+                    public void onClick(View v) {
+                        AlarmRegister();
                     }
-                }).start();
+                }
+        );
+    }
 
-            }
-        };
+    public void AlarmStop() {
+        btnAlarmStop.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlarmUnregister();
+                    }
+                }
+        );
+    }
 
-        Timer timer = new Timer();
-        timer.schedule(timerTask, 0, 540000);
 
+    public void AlarmRegister() {
+
+        Cursor res = myDb.getNotiTime();
+        Log.d("AlarmRegister ", String.valueOf(res.getCount()));
+
+        if(res.getCount() == 0) {
+            //showMessage("None","조회내용이 없습니다.");
+            return ;
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        String[] hourMinute;
+
+        while (res.moveToNext()) {
+            Log.d("AlarmRegister ", "start");
+
+            Intent intent = new Intent(this, Alarm.class);
+            intent.putExtra("id", res.getString(0));
+            PendingIntent pIntent = PendingIntent.getBroadcast(this,Integer.valueOf(res.getString(0)),intent,0);
+
+            Log.d("NotiTime: ", res.getString(0)  + " " + res.getString(1));
+            hourMinute = res.getString(1).split(":");
+            calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hourMinute[0]));
+            calendar.set(Calendar.MINUTE, Integer.parseInt(hourMinute[1]));
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+
+//            notiTimeList.add(new String[]{res.getString(0), res.getString(1)});
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
+        }
+        Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
+    }
+
+    public void AlarmUnregister() {
+        Intent intent = new Intent(this, Alarm.class);
+        PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        alarmManager.cancel(pIntent);
+        Toast.makeText(this, "Alarm UnRegistered", Toast.LENGTH_LONG).show();
     }
 
     public void TestNoti() {
@@ -93,13 +142,13 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LoadSentenceForNoti();
+                        LoadSentenceForNotiUsingTimerTest();
                     }
                 }
         );
     }
 
-    public void showNotification(Sentence sentence) {
+    public void showNotificationTest(Sentence sentence) {
         builder = null;
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         //오레오 버전 이상
@@ -129,8 +178,20 @@ public class MainActivity extends AppCompatActivity {
         notificationManager.notify(1, notification);
     }
 
-    public void LoadSentenceForNoti() {
+
+
+
+    public void LoadSentenceForNotiUsingTimerTest() {
         Cursor res = myDb.getNotiData();
+
+        if(txtNotiTime.getText().length() > 500) {
+            txtNotiTime.setText("");
+        }
+        else {
+            Calendar cal = new GregorianCalendar();
+            txtNotiTime.append(cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + "-C:" + String.valueOf(res.getCount()) + " | ");
+        }
+
         if(res.getCount() == 0) {
             //showMessage("None","조회내용이 없습니다.");
             return ;
@@ -144,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     res.getString(5), res.getString(6),
                     res.getString(7), res.getString(8));
             //showMessage("Found",res.getString(1));
-            showNotification(sentence);
+            showNotificationTest(sentence);
         }
 
     }
