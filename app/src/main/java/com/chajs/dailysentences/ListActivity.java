@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Movie;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
 
+    private static final String TAG = "ListActivity";
     private ArrayList<Sentence> sentenceList;
     DatabaseHelper myDb = null;
 
@@ -32,15 +34,15 @@ public class ListActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
         recyclerView.setAdapter(new SentenceAdapter(sentenceList));  // Adapter 등록
+    }
 
-        SentenceAdapter adpater = new SentenceAdapter(sentenceList);
-        //adpater.setOnItemClickListener(new SentenceAdapter.OnItemClickListener() {
-        /*
-        @Override
-            public void onItemClick(View v, int position) {
-            }
-        });
-         */
+    protected void onNewIntent(Intent intent) {
+        Log.d(TAG,"onNewIntent: ");
+        if (intent != null )
+        {
+            InitializeData();
+        }
+        super.onNewIntent(intent);
     }
 
     public void InitializeData()
@@ -52,7 +54,7 @@ public class ListActivity extends AppCompatActivity {
             Toast.makeText(ListActivity.this, "Nothing Found", Toast.LENGTH_LONG);//show message
         }
         else {
-            //StringBuffer buffer = new StringBuffer();
+
             while (res.moveToNext()) {
                 sentenceList.add(new Sentence(res.getString(0),
                         res.getString(1), res.getString(2),

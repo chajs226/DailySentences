@@ -17,6 +17,9 @@ import static com.chajs.dailysentences.ContactDBctrl.COL_3;
 import static com.chajs.dailysentences.ContactDBctrl.COL_4;
 import static com.chajs.dailysentences.ContactDBctrl.COL_5;
 import static com.chajs.dailysentences.ContactDBctrl.COL_6;
+import static com.chajs.dailysentences.ContactDBctrl.COL_7;
+import static com.chajs.dailysentences.ContactDBctrl.COL_8;
+import static com.chajs.dailysentences.ContactDBctrl.COL_9;
 import static com.chajs.dailysentences.ContactDBctrl.TABLE_NAME;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -105,6 +108,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_5, end_date);
         contentValues.put(COL_6, popup_time);
         db.update(TABLE_NAME, contentValues, "id = ?", new String[] {id});
+        return true;
+    }
+
+    public boolean updateRecord(String id, String recordType, Integer recordUpdate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        if (recordType == "S") {
+            contentValues.put(COL_1, id);
+            contentValues.put(COL_7, recordUpdate);
+            db.update(TABLE_NAME, contentValues, "id = ?", new String[] {id});
+        }
+        else if (recordType == "F") {
+            contentValues.put(COL_1, id);
+            contentValues.put(COL_8, recordUpdate);
+            db.update(TABLE_NAME, contentValues, "id = ?", new String[] {id});
+        }
+        else if (recordType == "K") {
+            contentValues.put(COL_1, id);
+            contentValues.put(COL_9, recordUpdate);
+            db.update(TABLE_NAME, contentValues, "id = ?", new String[] {id});
+        }
         return true;
     }
 }

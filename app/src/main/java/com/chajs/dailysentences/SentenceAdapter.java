@@ -55,7 +55,7 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
                         Log.d("SentenceAdapter","position: " + String.valueOf(pos));
                         Log.d("SentenceAdapter","kor: " + sentence.getKorSentence());
 
-                        Intent intent = new Intent(v.getContext(), ShowSentenceActivity.class);
+                        Intent intent = new Intent(v.getContext(), InsertActivity.class);
                         intent.putExtra("sentence", sentence);
                         v.getContext().startActivity(intent);
                         /*
@@ -105,7 +105,7 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
         textSentence.setText(mySentenceList.get(position).getKorSentence());
         textCountInfo.setText("Success:" + mySentenceList.get(position).getSucessCount() + " " +
                 "Fail:" + mySentenceList.get(position).getFailCount() + " " +
-                "Pass:" + mySentenceList.get(position).getSkipCount());
+                "Skip:" + mySentenceList.get(position).getSkipCount());
     }
 
     @Override

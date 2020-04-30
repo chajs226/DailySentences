@@ -146,6 +146,14 @@
             android:layout_marginLeft="205dp"
             android:text="종료" />
 
+        <TextView
+            android:id="@+id/textViewRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="60dp"
+            android:text="Record" />
+
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

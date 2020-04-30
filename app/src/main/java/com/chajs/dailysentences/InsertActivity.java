@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,6 +21,7 @@ import java.util.GregorianCalendar;
 
 public class InsertActivity extends AppCompatActivity {
 
+    private static final String TAG = "InsertActivity";
     int mFromYear, mFromMonth, mFromDay, mToYear, mToMonth, mToDay, mHour, mMinute;
 
     DatabaseHelper myDb = null;
@@ -35,6 +38,8 @@ public class InsertActivity extends AppCompatActivity {
 
     Button btnSetTime;
     TextView txtTime;
+
+    TextView txtRecord;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +59,8 @@ public class InsertActivity extends AppCompatActivity {
 
         btnSetTime = (Button)findViewById(R.id.buttonTime);
         txtTime = (TextView)findViewById(R.id.textViewTime);
+
+        txtRecord = (TextView)findViewById(R.id.textViewRecord);
         AddData();
         SetDate();
         SetTime();
@@ -69,7 +76,40 @@ public class InsertActivity extends AppCompatActivity {
         mHour = cal.get(Calendar.HOUR_OF_DAY);
         mMinute = cal.get(Calendar.MINUTE);
 
-        UpdateNow();
+        Intent intent = getIntent();
+
+        onNewIntent(getIntent());
+
+    }
+
+    protected void onNewIntent(Intent intent) {
+        Log.d(TAG,"onNewIntent: ");
+        if (intent != null )
+        {
+            processIntent(intent);
+        }
+        super.onNewIntent(intent);
+    }
+
+    private void processIntent(Intent intent) {
+        Log.d(TAG,"processIntent: ");
+        Sentence sentence = (Sentence)intent.getSerializableExtra("sentence");
+        Log.d(TAG,"sentence: " + sentence);
+        if(sentence != null) {
+            id = sentence.getId();
+            txtStartDate.setText(sentence.getStartDate());
+            txtEndDate.setText(sentence.getEndDate());
+            txtTime.setText(sentence.getPopupTime());
+            txtRecord.setText("Success:" + sentence.getSucessCount() + " " +
+                    "Fail:" + sentence.getFailCount() + " " +
+                    "Skip:" + sentence.getSkipCount());
+            editKor.setText(sentence.getKorSentence());
+            editEng.setText(sentence.getEngSentence());
+        }
+        else {
+            UpdateNow();
+            txtRecord.setText(" ");
+        }
     }
 
     public void SetDate() {
@@ -130,6 +170,8 @@ public class InsertActivity extends AppCompatActivity {
 
                         }
                         finish();
+                        Intent intent = new Intent(v.getContext(), ListActivity.class);
+                        v.getContext().startActivity(intent);
                     }
                 }
         );

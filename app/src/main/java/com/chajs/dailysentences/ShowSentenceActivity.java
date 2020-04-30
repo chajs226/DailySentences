@@ -17,10 +17,15 @@ public class ShowSentenceActivity extends AppCompatActivity {
     DatabaseHelper myDb = null;
     Button btnViewAll;
     Button btnClose;
+    Button btnSuccess;
+    Button btnFail;
+    Button btnSkip;
+
     TextView txtKorSentence;
     TextView txtEngSentence;
     String id = null;
     private static final String TAG = "ShowSentenceActivity";
+    Sentence sentence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +34,16 @@ public class ShowSentenceActivity extends AppCompatActivity {
 
         myDb = new DatabaseHelper(this);
         btnViewAll = (Button)findViewById(R.id.buttonViewAll);
+        btnSuccess = (Button)findViewById(R.id.buttonSucess);
+        btnFail = (Button)findViewById(R.id.buttonFail);
+        btnSkip = (Button)findViewById(R.id.buttonSkip);
         btnClose = (Button)findViewById(R.id.buttonClose);
         txtKorSentence = (TextView)findViewById(R.id.textViewKorSentence);
         txtEngSentence = (TextView)findViewById(R.id.textViewEngSentence);
         viewAll();
+        UpdateSuccess();
+        UpdateFail();
+        UpdateSkip();
         close();
 
         Intent intent = getIntent();
@@ -51,7 +62,7 @@ public class ShowSentenceActivity extends AppCompatActivity {
 
     private void processIntent(Intent intent) {
         Log.d(TAG,"processIntent: ");
-        Sentence sentence = (Sentence)intent.getSerializableExtra("sentence");
+        sentence = (Sentence)intent.getSerializableExtra("sentence");
 
         if(sentence.getId() != null) {
             id = sentence.getId();
@@ -84,21 +95,58 @@ public class ShowSentenceActivity extends AppCompatActivity {
                             txtEngSentence.setVisibility(View.VISIBLE);
                         else
                             txtEngSentence.setVisibility(View.INVISIBLE);
-                        /*
-                        Cursor res = myDb.getAllData();
-                        if(res.getCount() == 0) {
-                            showMessage("Error", "Nothing Found");//show message
-                            return ;
-                        }
 
-                        StringBuffer buffer = new StringBuffer();
-                        while (res.moveToNext()) {
-                            buffer.append("Kor: " + res.getString(1) + "\n");
-                            buffer.append("Eng: " + res.getString(2) + "\n");
-                        }
+                    }
+                }
+        );
+    }
 
-                        showMessage("Data",buffer.toString());
-                        */
+    public void UpdateSuccess() {
+        btnSuccess.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer recordUpdate = Integer.valueOf(sentence.getSucessCount()) + 1;
+                        boolean result = myDb.updateRecord(sentence.getId(), "S", recordUpdate);
+                        if(result) {
+                            finish();
+                            Intent intent = new Intent(v.getContext(), ListActivity.class);
+                            v.getContext().startActivity(intent);
+                        }
+                    }
+                }
+        );
+    }
+
+    public void UpdateFail() {
+        btnFail.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer recordUpdate = Integer.valueOf(sentence.getFailCount()) + 1;
+                        boolean result = myDb.updateRecord(sentence.getId(), "F", recordUpdate);
+                        if(result) {
+                            finish();
+                            Intent intent = new Intent(v.getContext(), ListActivity.class);
+                            v.getContext().startActivity(intent);
+                        }
+                    }
+                }
+        );
+    }
+
+    public void UpdateSkip() {
+        btnSkip.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Integer recordUpdate = Integer.valueOf(sentence.getSkipCount()) + 1;
+                        boolean result = myDb.updateRecord(sentence.getId(), "K", recordUpdate);
+                        if(result) {
+                            finish();
+                            Intent intent = new Intent(v.getContext(), ListActivity.class);
+                            v.getContext().startActivity(intent);
+                        }
                     }
                 }
         );
