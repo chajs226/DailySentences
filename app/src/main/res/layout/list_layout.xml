@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -12,26 +13,63 @@
         <TextView
             android:id="@+id/textViewDateInfo"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="23dp"
+            android:background="#FFBACEDB"
             android:text="TextView"
-            android:textColor="#626266" />
+            android:textColor="#045D94" />
 
         <TextView
             android:id="@+id/textViewSentence"
             android:layout_width="match_parent"
             android:layout_height="28dp"
+            android:background="#DDE6ED"
             android:text="TextView"
+            android:textColor="#045D94"
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewCountInfo"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:ellipsize="none"
-            android:gravity="right"
-            android:text="TextView"
-            android:textAllCaps="false"
-            android:textColor="#626266" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewSCountInfo"
+                android:layout_width="140dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:background="#DDE6ED"
+                android:ellipsize="start"
+                android:text="TextView"
+                android:textAllCaps="false"
+                android:textColor="#4CAF50" />
+
+            <TextView
+                android:id="@+id/textViewFCountInfo"
+                android:layout_width="140dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="140dp"
+                android:background="#DDE6ED"
+                android:ellipsize="start"
+                android:text="TextView"
+                android:textColor="#F44336" />
+
+            <TextView
+                android:id="@+id/textViewKCountInfo"
+                android:layout_width="140dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="280dp"
+                android:background="#DDE6ED"
+                android:ellipsize="start"
+                android:text="TextView"
+                android:textAllCaps="false"
+                android:textColor="#A2A0A0" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/textViewBlank"
+            android:layout_width="match_parent"
+            android:layout_height="7dp" />
+
     </LinearLayout>
+
 </LinearLayout>

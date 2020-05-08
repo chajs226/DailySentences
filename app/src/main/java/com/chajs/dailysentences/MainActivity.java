@@ -1,5 +1,6 @@
 package com.chajs.dailysentences;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         myDb = new DatabaseHelper(this);
 
@@ -169,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
         builder.setContentTitle("Daily Practice");
         builder.setContentText(sentence.getKorSentence());
-        builder.setSmallIcon(R.drawable.main_pic);
+        builder.setSmallIcon(R.drawable.icon);
         builder.setAutoCancel(true);
         builder.setContentIntent(pendingIntent);
 

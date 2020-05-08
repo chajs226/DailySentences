@@ -1,5 +1,6 @@
 package com.chajs.dailysentences;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,15 +27,21 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("등록 리스트");
 
         myDb = new DatabaseHelper(this);
         this.InitializeData();
-
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.RecyclerViewList);
-        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
-        recyclerView.setLayoutManager(manager); // LayoutManager 등록
-        recyclerView.setAdapter(new SentenceAdapter(sentenceList));  // Adapter 등록
     }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        InitializeData();
+        // The activity has become visible (it is now "resumed").
+    }
+
 
     protected void onNewIntent(Intent intent) {
         Log.d(TAG,"onNewIntent: ");
@@ -63,6 +70,11 @@ public class ListActivity extends AppCompatActivity {
                         res.getString(7), res.getString(8)));
                 }
         }
+
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.RecyclerViewList);
+        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(manager); // LayoutManager 등록
+        recyclerView.setAdapter(new SentenceAdapter(sentenceList));  // Adapter 등록
 
     }
 }

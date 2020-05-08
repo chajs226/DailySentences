@@ -9,24 +9,13 @@
     <FrameLayout
         android:id="@+id/frameTitle"
         android:layout_width="407dp"
-        android:layout_height="73dp"
+        android:layout_height="10dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/frameKor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="20dp"
-            android:text="문장등록"
-            android:textColor="#01534C"
-            android:textSize="30sp" />
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/frameKor"
@@ -92,11 +81,14 @@
 
         <Button
             android:id="@+id/buttonAdd"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="100dp"
-            android:text="저장" />
+            android:layout_marginTop="110dp"
+            android:background="#DDE6ED"
+            android:text="저장"
+            android:textColor="#045D94"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/textViewStartDate"
@@ -120,16 +112,18 @@
             android:id="@+id/buttonTime"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="55dp"
+            android:background="#DDE6ED"
             android:text="알림"
-            android:textSize="14sp" />
+            android:textColor="#045D94"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/textViewTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="85dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="62dp"
             android:text="HH:MM"
             android:textSize="18sp" />
 
@@ -137,22 +131,38 @@
             android:id="@+id/buttonStartDate"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="시작" />
+            android:background="#DDE6ED"
+            android:text="시작"
+            android:textColor="#045D94"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/buttonEndDate"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="205dp"
-            android:text="종료" />
+            android:background="#DDE6ED"
+            android:text="종료"
+            android:textColor="#045D94"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/textViewRecord"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginLeft="210dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="62dp"
             android:text="Record" />
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="260dp"
+            android:layout_marginTop="110dp"
+            android:background="#DDE6ED"
+            android:text="삭제"
+            android:textSize="20dp" />
 
     </FrameLayout>
 

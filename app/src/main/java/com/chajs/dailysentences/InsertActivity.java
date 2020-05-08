@@ -1,5 +1,6 @@
 package com.chajs.dailysentences;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -27,6 +28,7 @@ public class InsertActivity extends AppCompatActivity {
     DatabaseHelper myDb = null;
     EditText editKor, editEng;
     Button btnAddData;
+    Button btnDeleteData;
     boolean tableExists = false;
     String id = null;
 
@@ -45,11 +47,15 @@ public class InsertActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("문장 등록");
+
         myDb = new DatabaseHelper(this);
 
         editKor = (EditText)findViewById(R.id.editTextKor);
         editEng = (EditText)findViewById(R.id.editTextEng);
         btnAddData = (Button)findViewById(R.id.buttonAdd);
+        btnDeleteData = (Button)findViewById(R.id.buttonDelete);
 
         btnStartDate = (Button)findViewById(R.id.buttonStartDate);
         txtStartDate = (TextView)findViewById(R.id.textViewStartDate);
@@ -62,6 +68,7 @@ public class InsertActivity extends AppCompatActivity {
 
         txtRecord = (TextView)findViewById(R.id.textViewRecord);
         AddData();
+        DeleteData();
         SetDate();
         SetTime();
 
@@ -170,11 +177,37 @@ public class InsertActivity extends AppCompatActivity {
 
                         }
                         finish();
-                        Intent intent = new Intent(v.getContext(), ListActivity.class);
-                        v.getContext().startActivity(intent);
+                        onBackPressed();
                     }
                 }
         );
+    }
+
+    public void DeleteData() {
+        btnDeleteData.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(id == null) {
+                                Toast.makeText(InsertActivity.this, "Data Nothing", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            boolean isDeleted = myDb.deleteData(id);
+                            if (isDeleted == true)
+                                Toast.makeText(InsertActivity.this, "Data Deleted", Toast.LENGTH_LONG).show();
+                            else
+                                Toast.makeText(InsertActivity.this, "Data not Deleted", Toast.LENGTH_LONG).show();
+                        }
+                        finish();
+                        onBackPressed();
+
+                    }
+                }
+        );
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     DatePickerDialog.OnDateSetListener mFromDateSetListener =

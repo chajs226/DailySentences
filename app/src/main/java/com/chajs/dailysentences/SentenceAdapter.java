@@ -36,13 +36,17 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txtDateInfo;
         TextView txtSentence;
-        TextView txtCountInfo;
+        TextView txtSCountInfo;
+        TextView txtFCountInfo;
+        TextView txtKCountInfo;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             this.txtDateInfo = (TextView) itemView.findViewById(R.id.textViewDateInfo);
             this.txtSentence = (TextView) itemView.findViewById(R.id.textViewSentence);
-            this.txtCountInfo = (TextView) itemView.findViewById(R.id.textViewCountInfo);
+            this.txtSCountInfo = (TextView) itemView.findViewById(R.id.textViewSCountInfo);
+            this.txtFCountInfo = (TextView) itemView.findViewById(R.id.textViewFCountInfo);
+            this.txtKCountInfo = (TextView) itemView.findViewById(R.id.textViewKCountInfo);
 
             //아이템 클릭 이벤트 처리
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -58,16 +62,6 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
                         Intent intent = new Intent(v.getContext(), InsertActivity.class);
                         intent.putExtra("sentence", sentence);
                         v.getContext().startActivity(intent);
-                        /*
-                        if (mListener != null) {
-
-                            Log.d("mListener","position: " + String.valueOf(pos));
-                            Log.d("mListener","kor: " + sentence.getKorSentence());
-
-                            mListener.onItemClick(v, pos);
-                        }
-                        */
-
                     }
                 }
             });
@@ -97,15 +91,17 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
 
         TextView textDateInfo = holder.txtDateInfo;
         TextView textSentence = holder.txtSentence;
-        TextView textCountInfo = holder.txtCountInfo;
+        TextView textSCountInfo = holder.txtSCountInfo;
+        TextView textFCountInfo = holder.txtFCountInfo;
+        TextView textKCountInfo = holder.txtKCountInfo;
 
         textDateInfo.setText("Noti time: " + mySentenceList.get(position).getPopupTime() + "    Duration: " +
                 mySentenceList.get(position).getStartDate() + " - " +
                 mySentenceList.get(position).getEndDate());
         textSentence.setText(mySentenceList.get(position).getKorSentence());
-        textCountInfo.setText("Success:" + mySentenceList.get(position).getSucessCount() + " " +
-                "Fail:" + mySentenceList.get(position).getFailCount() + " " +
-                "Skip:" + mySentenceList.get(position).getSkipCount());
+        textSCountInfo.setText("Success:" + mySentenceList.get(position).getSucessCount());
+        textFCountInfo.setText("Fail:" + mySentenceList.get(position).getFailCount());
+        textKCountInfo.setText("Skip:" + mySentenceList.get(position).getSkipCount());
     }
 
     @Override

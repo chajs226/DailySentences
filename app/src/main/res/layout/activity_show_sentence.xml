@@ -9,7 +9,7 @@
     <FrameLayout
         android:id="@+id/frameInfo"
         android:layout_width="413dp"
-        android:layout_height="50dp"
+        android:layout_height="10dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
@@ -44,6 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="157dp"
             android:layout_marginTop="40dp"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
             android:textSize="18sp" />
 
     </FrameLayout>
@@ -69,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="155dp"
             android:layout_marginTop="40dp"
+            android:scrollbars="vertical"
             android:textSize="18sp"
             android:visibility="invisible" />
     </FrameLayout>
@@ -94,8 +97,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="72dp"
+            android:background="#DDE6ED"
             android:text="CHECK"
-            android:textSize="18sp" />
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/buttonSucess"
@@ -103,8 +107,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="10dp"
+            android:background="#DDE6ED"
             android:text="PASS"
-            android:textSize="18sp" />
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/buttonFail"
@@ -112,8 +117,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="200dp"
             android:layout_marginTop="10dp"
+            android:background="#DDE6ED"
             android:text="FAIL"
-            android:textSize="18sp" />
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/buttonSkip"
@@ -121,16 +127,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="300dp"
             android:layout_marginTop="10dp"
+            android:background="#DDE6ED"
             android:text="SKIP"
-            android:textSize="18sp" />
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/buttonClose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
+            android:background="#DDE6ED"
             android:text="닫기"
-            android:textSize="18sp" />
+            android:textSize="20dp" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
