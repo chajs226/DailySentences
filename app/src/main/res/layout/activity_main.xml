@@ -52,7 +52,7 @@
             android:id="@+id/textViewVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="v.2020.05.08"
+            android:text="v.2020.05.14"
             android:visibility="visible" />
 
         <TextView
@@ -105,6 +105,13 @@
             android:textColor="#045D94"
             android:textSize="35dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewAlarmStat"
+            android:layout_width="300dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="260dp"
+            android:textSize="13dp" />
 
     </FrameLayout>
 

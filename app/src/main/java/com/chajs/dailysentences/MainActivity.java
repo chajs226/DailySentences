@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnAlarmStart;
     Button btnAlarmStop;
     TextView txtNotiTime;
+    TextView txtAlarmStat;
 
     NotificationManager notificationManager;
     NotificationCompat.Builder builder;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         btnAlarmStart = (Button)findViewById(R.id.buttonAlarmStart);
         btnAlarmStop = (Button)findViewById(R.id.buttonAlarmStop);
         txtNotiTime = (TextView) findViewById(R.id.textViewNotiTime);
+        txtAlarmStat = (TextView) findViewById(R.id.textViewAlarmStat);
 
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
@@ -132,13 +134,15 @@ public class MainActivity extends AppCompatActivity {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
         }
         Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
+        txtAlarmStat.setText("Alarm Registered");
     }
 
     public void AlarmUnregister() {
         Intent intent = new Intent(this, Alarm.class);
         PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
         alarmManager.cancel(pIntent);
-        Toast.makeText(this, "Alarm UnRegistered", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Alarm Unregistered", Toast.LENGTH_LONG).show();
+        txtAlarmStat.setText("Alarm Unregistered");
     }
 
     public void TestNoti() {

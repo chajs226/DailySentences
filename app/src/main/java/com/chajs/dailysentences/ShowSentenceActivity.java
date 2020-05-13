@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,9 @@ public class ShowSentenceActivity extends AppCompatActivity {
         btnSkip = (Button)findViewById(R.id.buttonSkip);
         btnClose = (Button)findViewById(R.id.buttonClose);
         txtKorSentence = (TextView)findViewById(R.id.textViewKorSentence);
+        txtKorSentence.setMovementMethod(new ScrollingMovementMethod());
         txtEngSentence = (TextView)findViewById(R.id.textViewEngSentence);
+        txtEngSentence.setMovementMethod(new ScrollingMovementMethod());
         viewAll();
         UpdateSuccess();
         UpdateFail();
