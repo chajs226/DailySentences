@@ -17,6 +17,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import androidx.core.app.NotificationCompat;
 
@@ -45,6 +47,7 @@ public class Alarm extends BroadcastReceiver {
 
         LoadSentenceForNotiUsingAlarm(context, id);
 
+
     }
 
     public void LoadSentenceForNotiUsingAlarm(Context context, String[] id) {
@@ -67,7 +70,7 @@ public class Alarm extends BroadcastReceiver {
 
     }
 
-    public void showNotification(Context context, Sentence sentence) {
+    public void showNotification(Context context, final Sentence sentence) {
         builder = null;
         notificationManager = (NotificationManager)context.getSystemService(NOTIFICATION_SERVICE);
         //오레오 버전 이상
@@ -95,6 +98,24 @@ public class Alarm extends BroadcastReceiver {
         Notification notification = builder.build();
 
         notificationManager.notify(1, notification);
+
+        //시간 지나면 skip 처리
+        TimerTask task = new TimerTask() {
+            public void run() {
+                try {
+                    Integer recordUpdate = Integer.valueOf(sentence.getSkipCount()) + 1;
+                    boolean isUpdated = myDb.updateRecord(sentence.getId(), "K", recordUpdate);
+
+                    if(isUpdated) {
+                        notificationManager.cancel(1);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task, 90000);
     }
 
 }
