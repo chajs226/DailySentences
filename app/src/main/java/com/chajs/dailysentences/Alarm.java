@@ -63,7 +63,7 @@ public class Alarm extends BroadcastReceiver {
                     res.getString(1), res.getString(2),
                     res.getString(3), res.getString(4),
                     res.getString(5), res.getString(6),
-                    res.getString(7), res.getString(8));
+                    res.getString(7), res.getString(8), res.getString(9));
             //showMessage("Found",res.getString(1));
             showNotification(context, sentence);
         }

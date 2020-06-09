@@ -15,8 +15,9 @@ public class Sentence  implements Serializable {
     public String sucessCount;
     public String failCount;
     public String skipCount;
+    public String point;
 
-    public Sentence(String id, String korSentence, String engSentence, String startDate, String endDate, String popupTime, String sucessCount, String failCount, String skipCount) {
+    public Sentence(String id, String korSentence, String engSentence, String startDate, String endDate, String popupTime, String sucessCount, String failCount, String skipCount, String point) {
         this.id = id;
         this.korSentence = korSentence;
         this.engSentence = engSentence;
@@ -26,6 +27,7 @@ public class Sentence  implements Serializable {
         this.sucessCount = sucessCount;
         this.failCount = failCount;
         this.skipCount = skipCount;
+        this.point = point;
     }
 
     public String getId() {
@@ -99,6 +101,8 @@ public class Sentence  implements Serializable {
     public void setSkipCount(String skipCount) {
         this.skipCount = skipCount;
     }
+
+    public String getPoint() { return point; }
 
 
 }

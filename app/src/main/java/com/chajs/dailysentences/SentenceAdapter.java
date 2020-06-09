@@ -17,28 +17,13 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
 
     private ArrayList<Sentence> mySentenceList = null;
 
-    /*
-    public interface OnItemClickListener {
-        void onItemClick(View v, int position);
-    }
-     */
-
-    // 리스너 객체 참조를 저장하는 변수
-    //private OnItemClickListener mListener = null ;
-
-    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
-    /*
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.mListener = listener ;
-    }
-     */
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txtDateInfo;
         TextView txtSentence;
         TextView txtSCountInfo;
         TextView txtFCountInfo;
         TextView txtKCountInfo;
+        TextView txtPoint;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -47,6 +32,7 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
             this.txtSCountInfo = (TextView) itemView.findViewById(R.id.textViewSCountInfo);
             this.txtFCountInfo = (TextView) itemView.findViewById(R.id.textViewFCountInfo);
             this.txtKCountInfo = (TextView) itemView.findViewById(R.id.textViewKCountInfo);
+            this.txtPoint = (TextView) itemView.findViewById(R.id.textViewPoint);
 
             //아이템 클릭 이벤트 처리
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +80,7 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
         TextView textSCountInfo = holder.txtSCountInfo;
         TextView textFCountInfo = holder.txtFCountInfo;
         TextView textKCountInfo = holder.txtKCountInfo;
+        TextView textPoint = holder.txtPoint;
 
         textDateInfo.setText("Noti time: " + mySentenceList.get(position).getPopupTime() + "    Duration: " +
                 mySentenceList.get(position).getStartDate() + " - " +
@@ -102,6 +89,7 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
         textSCountInfo.setText("Success:" + mySentenceList.get(position).getSucessCount());
         textFCountInfo.setText("Fail:" + mySentenceList.get(position).getFailCount());
         textKCountInfo.setText("Skip:" + mySentenceList.get(position).getSkipCount());
+        textPoint.setText(("Point:" + mySentenceList.get(position).getPoint()));
     }
 
     @Override

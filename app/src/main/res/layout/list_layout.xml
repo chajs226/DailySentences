@@ -34,7 +34,7 @@
 
             <TextView
                 android:id="@+id/textViewSCountInfo"
-                android:layout_width="140dp"
+                android:layout_width="100dp"
                 android:layout_height="25dp"
                 android:layout_alignParentLeft="true"
                 android:background="#DDE6ED"
@@ -45,9 +45,9 @@
 
             <TextView
                 android:id="@+id/textViewFCountInfo"
-                android:layout_width="140dp"
+                android:layout_width="100dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="140dp"
+                android:layout_marginLeft="100dp"
                 android:background="#DDE6ED"
                 android:ellipsize="start"
                 android:text="TextView"
@@ -55,14 +55,22 @@
 
             <TextView
                 android:id="@+id/textViewKCountInfo"
-                android:layout_width="140dp"
+                android:layout_width="100dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="280dp"
+                android:layout_marginLeft="200dp"
                 android:background="#DDE6ED"
                 android:ellipsize="start"
                 android:text="TextView"
                 android:textAllCaps="false"
                 android:textColor="#A2A0A0" />
+
+            <TextView
+                android:id="@+id/textViewPoint"
+                android:layout_width="111dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="300dp"
+                android:background="#DDE6ED"
+                android:text="TextView" />
         </FrameLayout>
 
         <TextView
