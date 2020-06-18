@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     private static String CHANNEL_ID = "channel1";
     private static String CHANEL_NAME = "Chaneel1";
 
-
     private AlarmManager alarmManager;
 
     @Override
@@ -77,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         TestNoti();
         AlarmStart();
         AlarmStop();
+
+
 
     }
 

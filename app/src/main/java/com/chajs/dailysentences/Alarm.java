@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,18 +24,19 @@ import java.util.TimerTask;
 import androidx.core.app.NotificationCompat;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
-//import static com.chajs.dailysentences.MainActivity.CHANEL_NAME;
-//import static com.chajs.dailysentences.MainActivity.CHANNEL_ID;
 
 public class Alarm extends BroadcastReceiver {
 
     DatabaseHelper myDb;
     Sentence sentence;
+    Boolean isUpdated = false;
     NotificationManager notificationManager;
     NotificationCompat.Builder builder;
+    Boolean isFirstTime = true;
 
     private static String CHANNEL_ALARM_ID = "channel1";
     private static String CHANEL_ALARM_NAME = "Chaneel1";
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -44,8 +46,27 @@ public class Alarm extends BroadcastReceiver {
 
         Log.d("onReceive", "ID = " + id);
 
-
         LoadSentenceForNotiUsingAlarm(context, id);
+
+        //시간 지나면 skip 처리
+        /*
+        TimerTask task = new TimerTask() {
+            public void run() {
+                try {
+                    Integer recordUpdate = Integer.valueOf(sentence.getSkipCount()) + 1;
+                    isUpdated = myDb.updateRecord(sentence.getId(), "K", recordUpdate);
+
+                    if(isUpdated) {
+                        notificationManager.cancel(1);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        */
+
+
 
 
     }
@@ -99,23 +120,38 @@ public class Alarm extends BroadcastReceiver {
 
         notificationManager.notify(1, notification);
 
-        //시간 지나면 skip 처리
-        TimerTask task = new TimerTask() {
-            public void run() {
+        //타이머 시작
+        CountDownTimer timer = new CountDownTimer(150000, 90000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
                 try {
-                    Integer recordUpdate = Integer.valueOf(sentence.getSkipCount()) + 1;
-                    boolean isUpdated = myDb.updateRecord(sentence.getId(), "K", recordUpdate);
-
-                    if(isUpdated) {
-                        notificationManager.cancel(1);
+                    if (isFirstTime == true) {
+                        isFirstTime = false;
                     }
+                    else {
+                        Integer recordUpdate = Integer.valueOf(sentence.getSkipCount()) + 1;
+                        isUpdated = myDb.updateRecord(sentence.getId(), "K", recordUpdate);
+
+                        if(isUpdated) {
+                            notificationManager.cancel(1);
+                        }
+
+                        isFirstTime = true;
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+            }
+
+            @Override
+            public void onFinish() {
+
             }
         };
-        Timer timer = new Timer();
-        timer.schedule(task, 90000);
+
+        timer.start();
     }
 
 }
