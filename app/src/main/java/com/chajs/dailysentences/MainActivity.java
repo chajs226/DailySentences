@@ -39,13 +39,14 @@ public class MainActivity extends AppCompatActivity {
     Button btnAlarmStart;
     Button btnAlarmStop;
     TextView txtNotiTime;
-    TextView txtAlarmStat;
+    static TextView txtAlarmStat;
 
     NotificationManager notificationManager;
     NotificationCompat.Builder builder;
 
     private static String CHANNEL_ID = "channel1";
     private static String CHANEL_NAME = "Chaneel1";
+
 
     private AlarmManager alarmManager;
 

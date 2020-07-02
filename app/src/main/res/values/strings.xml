@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DailySentences</string>
+    <string name="test">Hello World! This is the initial card view!!</string>
 </resources>

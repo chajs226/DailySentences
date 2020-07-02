@@ -22,6 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
+        android:background="#00050505"
         app:layout_constraintBottom_toTopOf="@+id/frameEng"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="[Q]"
+            android:textColor="#A6000000"
             android:textSize="18sp" />
 
         <EditText
@@ -39,15 +41,18 @@
             android:layout_width="match_parent"
             android:layout_height="176dp"
             android:layout_marginTop="35dp"
+            android:background="#003D5854"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="#A6000000" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameEng"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#00000000"
         app:layout_constraintBottom_toTopOf="@+id/frameButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="[A]"
+            android:textColor="#A6000000"
             android:textSize="18sp" />
 
         <EditText
@@ -65,15 +71,18 @@
             android:layout_width="match_parent"
             android:layout_height="177dp"
             android:layout_marginTop="35dp"
+            android:background="#003D5854"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="#A6000000" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameButton"
         android:layout_width="407dp"
         android:layout_height="176dp"
+        android:background="#00000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,9 +94,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="110dp"
-            android:background="#DDE6ED"
+            android:background="#3D5854"
             android:text="저장"
-            android:textColor="#045D94"
+            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <TextView
@@ -113,9 +122,9 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="55dp"
-            android:background="#DDE6ED"
+            android:background="#3D5854"
             android:text="알림"
-            android:textColor="#045D94"
+            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <TextView
@@ -131,9 +140,9 @@
             android:id="@+id/buttonStartDate"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:background="#DDE6ED"
+            android:background="#3D5854"
             android:text="시작"
-            android:textColor="#045D94"
+            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <Button
@@ -141,9 +150,9 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="205dp"
-            android:background="#DDE6ED"
+            android:background="#3D5854"
             android:text="종료"
-            android:textColor="#045D94"
+            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <TextView
@@ -160,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="260dp"
             android:layout_marginTop="110dp"
-            android:background="#DDE6ED"
+            android:background="#3D5854"
             android:text="삭제"
             android:textSize="20dp" />
 
