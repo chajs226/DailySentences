@@ -21,11 +21,12 @@ import static com.chajs.dailysentences.ContactDBctrl.COL_7;
 import static com.chajs.dailysentences.ContactDBctrl.COL_8;
 import static com.chajs.dailysentences.ContactDBctrl.COL_9;
 import static com.chajs.dailysentences.ContactDBctrl.TABLE_NAME;
+import static com.chajs.dailysentences.ContactDBctrl.SET_TABLE_NAME;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Mysentences.db";
-    public static final int DB_VERSION = 3;
+    public static final int DB_VERSION = 5;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
@@ -38,6 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.d("onCreate Before: ","before");
         db.execSQL(ContactDBctrl.SQL_CREATE_TB_MYSENTENCE);
+        db.execSQL(ContactDBctrl.SQL_CREATE_TB_SETTINGS);
         Log.d("onCreate After: ","after");
     }
 
@@ -53,6 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(ContactDBctrl.SQL_DROP_TB_MYSENTENCE);
+        db.execSQL(ContactDBctrl.SQL_DROP_TB_SETTINGS);
         onCreate(db);
     }
 
@@ -136,5 +139,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.update(TABLE_NAME, contentValues, "id = ?", new String[] {id});
         }
         return true;
+    }
+
+    public boolean saveSettingData(String AutoArlam_yn, String fromTime, String toTime, Integer dailyAlramCount, String usingServer, String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("AUTOARLAM_YN", AutoArlam_yn);
+        contentValues.put("FROM_TIME", fromTime);
+        contentValues.put("TO_TIME", toTime);
+        contentValues.put("DAILY_ARLAM_COUNT", dailyAlramCount);
+        contentValues.put("USING_SERVER_YN", usingServer);
+        contentValues.put("EMAIL", email);
+        Log.d("insertData Before: ","before");
+        long result = db.insert(SET_TABLE_NAME, null, contentValues);
+        Log.d("insertData After: ","after");
+        Log.d("result: ", String.valueOf(result));
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean updateSettingDataLocal(String id, String AutoArlam_yn, String fromTime, String toTime, Integer dailyAlramCount, String usingServer, String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("AUTOARLAM_YN", AutoArlam_yn);
+        contentValues.put("FROM_TIME", fromTime);
+        contentValues.put("TO_TIME", toTime);
+        contentValues.put("DAILY_ARLAM_COUNT", dailyAlramCount);
+        contentValues.put("USING_SERVER_YN", usingServer);
+        contentValues.put("EMAIL", email);
+        db.update(SET_TABLE_NAME, contentValues, "id = ?", new String[] {id});
+        return true;
+    }
+
+    public Cursor getSettingData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery(ContactDBctrl.SQL_SELECT_SETTINGS_DATA,null);
+        return res;
     }
 }

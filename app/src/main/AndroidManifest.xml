@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListActivity"></activity>
+        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".ListActivity" />
         <activity android:name=".ShowSentenceActivity" />
         <activity android:name=".InsertActivity" />
         <activity android:name=".MainActivity">
@@ -19,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".Alarm"></receiver>
+
+        <receiver android:name=".Alarm" />
     </application>
 
 </manifest>

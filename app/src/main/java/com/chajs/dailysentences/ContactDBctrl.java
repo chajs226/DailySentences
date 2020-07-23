@@ -14,6 +14,8 @@ public class ContactDBctrl {
     public static final String COL_8 = "FAIL_COUNT";
     public static final String COL_9 = "SKIP_COUNT";
 
+    public static final String SET_TABLE_NAME = "SETTINGS";
+
     public static final String SQL_CREATE_TB_MYSENTENCE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME  + " " +
             "(" +
             COL_1 +     " INTEGER PRIMARY KEY AUTOINCREMENT"  + ", " +
@@ -27,8 +29,22 @@ public class ContactDBctrl {
             COL_9 +     " INTEGER"                               +
             ")";
 
+    public static final String SQL_CREATE_TB_SETTINGS = "CREATE TABLE IF NOT EXISTS " + SET_TABLE_NAME + " " +
+            "(" +
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "AUTOARLAM_YN TEXT, " +
+            "FROM_TIME TEXT, " +
+            "TO_TIME TEXT, " +
+            "DAILY_ARLAM_COUNT INTEGER, " +
+            "USING_SERVER_YN TEXT, " +
+            "EMAIL TEXT" +
+            ")";
+
     // DROP TABLE IF EXISTS CONTACT_T
     public static final String SQL_DROP_TB_MYSENTENCE = "DROP TABLE IF EXISTS " + TABLE_NAME ;
+
+    // DROP TABLE IF EXISTS CONTACT_T
+    public static final String SQL_DROP_TB_SETTINGS = "DROP TABLE IF EXISTS " + SET_TABLE_NAME ;
 
     // 테이블 존재 유무 확인
     public static final String SQL_CHECK_EXISTS_TABLE = "SELECT * FROM SQLITE_MASTER WHERE Name = " + TABLE_NAME;
@@ -45,6 +61,7 @@ public class ContactDBctrl {
     public static final String SQL_SELECT_DATA_FROM_ID = "SELECT ID, KOR_SENTENCE, ENG_SENTENCE, START_DATE, END_DATE, POPUP_TIME, IFNULL(SUCCESS_COUNT,'0'), IFNULL(FAIL_COUNT,'0'), IFNULL(SKIP_COUNT,'0'), IFNULL(SUCCESS_COUNT,'0')*5 + IFNULL(FAIL_COUNT,'0')*-1 + IFNULL(SKIP_COUNT,'0')*-2 AS 'RATI'  FROM " + TABLE_NAME +
             " WHERE ID = ?";
 
+    public static final String SQL_SELECT_SETTINGS_DATA = "SELECT ID, AUTOARLAM_YN, FROM_TIME, TO_TIME, DAILY_ARLAM_COUNT, USING_SERVER_YN, EMAIL FROM " + SET_TABLE_NAME;
     // SELECT * FROM CONTACT_T
     //public static final String SQL_SELECT_TB_MYSENTENCE = "SELECT * FROM " + TABLE_NAME ;
 

@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnList;
     Button btnAlarmStart;
     Button btnAlarmStop;
+    Button btnSettings;
     TextView txtNotiTime;
     static TextView txtAlarmStat;
 
@@ -66,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         btnList = (Button) findViewById(R.id.buttonLoadList);
         btnAlarmStart = (Button)findViewById(R.id.buttonAlarmStart);
         btnAlarmStop = (Button)findViewById(R.id.buttonAlarmStop);
+        btnSettings = (Button)findViewById(R.id.buttonSettings);
+
         txtNotiTime = (TextView) findViewById(R.id.textViewNotiTime);
         txtAlarmStat = (TextView) findViewById(R.id.textViewAlarmStat);
 
@@ -74,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         OpenInsertActivity();
         OpenShowSentenceActivity();
         OpenListActivity();
+        OpenSettingsActivity();
         TestNoti();
         AlarmStart();
         AlarmStop();
@@ -104,11 +109,93 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-
     public void AlarmRegister() {
+        String autoAlarmYN;
+        String fromTime;
+        String toTime;
+        String count;
+
+        autoAlarmYN = "N";
+        fromTime = "";
+        toTime = "";
+        count = "0";
+
+        Cursor res = myDb.getSettingData();
+        if(res.getCount() == 0) {
+            autoAlarmYN = "N";
+            fromTime = "";
+            toTime = "";
+            count = "0";
+        }
+        else {
+            while (res.moveToNext()) {
+                autoAlarmYN = res.getString(1).toString();
+                fromTime = res.getString(2).toString();
+                toTime = res.getString(3).toString();
+                count = res.getString(4).toString();
+            }
+        }
+
+        Log.d("AlarmRegister",autoAlarmYN);
+        Log.d("AlarmRegister",fromTime);
+        Log.d("AlarmRegister",toTime);
+
+        if(autoAlarmYN.equals("Y")) {
+            AlarmRegisterByAuto(fromTime, toTime, count);
+        }
+        else {
+            AlarmRegisterByManual();
+        }
+    }
+
+    public void AlarmRegisterByAuto(String fromTime, String toTime, String count) {
+
+        Integer fromTimeMin, toTimeMin;
+        Integer countpereach;
+
+
+        fromTimeMin = Integer.parseInt(fromTime.split(":")[0]) * 60 + Integer.parseInt(fromTime.split(":")[1]);
+        toTimeMin = Integer.parseInt(toTime.split(":")[0]) * 60 + Integer.parseInt(toTime.split(":")[1]);
+
+        countpereach = Integer.parseInt(count);
+
+        Random rand = new Random();
 
         Cursor res = myDb.getNotiTime();
-        Log.d("AlarmRegister ", String.valueOf(res.getCount()));
+        if (res.getCount() == 0) {
+            //showMessage("None","조회내용이 없습니다.");
+            return;
+        }
+
+        Calendar calendar = Calendar.getInstance();
+
+        while (res.moveToNext()) {
+            for (int i = 0; i < countpereach; i++) {
+                Intent intent = new Intent(this, Alarm.class);
+                intent.putExtra("id", res.getString(0));
+                PendingIntent pIntent = PendingIntent.getBroadcast(this, Integer.valueOf(res.getString(0)), intent, 0);
+
+                int randomValue = rand.nextInt(toTimeMin - fromTimeMin) + fromTimeMin;
+
+                Log.d("NotiTime: ", String.valueOf(randomValue));
+                Log.d("NotiTime: ", String.valueOf(randomValue / 60));
+                Log.d("NotiTime: ", String.valueOf(randomValue % 60));
+
+                calendar.set(Calendar.HOUR_OF_DAY, randomValue / 60);
+                calendar.set(Calendar.MINUTE, randomValue % 60);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
+            }
+        }
+        Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
+        txtAlarmStat.setText("Alarm Registered");
+    }
+
+    public void AlarmRegisterByManual() {
+
+        Cursor res = myDb.getNotiTime();
+        Log.d("AlarmRegister", String.valueOf(res.getCount()));
 
         if(res.getCount() == 0) {
             //showMessage("None","조회내용이 없습니다.");
@@ -250,6 +337,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+    }
+
+    public void OpenSettingsActivity() {
+        btnSettings.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
                         startActivity(intent);
                     }
                 }
