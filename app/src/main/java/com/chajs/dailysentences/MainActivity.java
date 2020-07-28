@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = (Button) findViewById(R.id.buttonInsert);
         btnShow = (Button) findViewById(R.id.buttonVeiwAll);
         btnTestNoti = (Button) findViewById(R.id.buttonNoti);
+        btnTestNoti.setVisibility(View.INVISIBLE);
         btnList = (Button) findViewById(R.id.buttonLoadList);
         btnAlarmStart = (Button)findViewById(R.id.buttonAlarmStart);
         btnAlarmStop = (Button)findViewById(R.id.buttonAlarmStop);
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
+        //이벤트 함수
         OpenInsertActivity();
         OpenShowSentenceActivity();
         OpenListActivity();
@@ -83,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         AlarmStart();
         AlarmStop();
 
+        //알람 자동 실행
+        AlarmRegister();
 
 
     }
@@ -152,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
         Integer fromTimeMin, toTimeMin;
         Integer countpereach;
-
+        StringBuilder notiTimes = new StringBuilder("");
 
         fromTimeMin = Integer.parseInt(fromTime.split(":")[0]) * 60 + Integer.parseInt(fromTime.split(":")[1]);
         toTimeMin = Integer.parseInt(toTime.split(":")[0]) * 60 + Integer.parseInt(toTime.split(":")[1]);
@@ -186,14 +192,18 @@ public class MainActivity extends AppCompatActivity {
                 calendar.set(Calendar.SECOND, 0);
                 calendar.set(Calendar.MILLISECOND, 0);
                 alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
+
+                notiTimes.append(String.valueOf(randomValue / 60) + ":" + String.valueOf(randomValue % 60) + " ");
             }
         }
+        txtNotiTime.setText(notiTimes.toString());
         Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
         txtAlarmStat.setText("Alarm Registered");
     }
 
     public void AlarmRegisterByManual() {
 
+        StringBuilder notiTimes = new StringBuilder("");
         Cursor res = myDb.getNotiTime();
         Log.d("AlarmRegister", String.valueOf(res.getCount()));
 
@@ -219,9 +229,10 @@ public class MainActivity extends AppCompatActivity {
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
 
-//            notiTimeList.add(new String[]{res.getString(0), res.getString(1)});
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
+            notiTimes.append(res.getString(1) + " ");
         }
+        txtAlarmStat.setText("Alarm Registered");
         Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
         txtAlarmStat.setText("Alarm Registered");
     }
