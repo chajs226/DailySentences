@@ -6,173 +6,203 @@
     android:layout_height="match_parent"
     tools:context=".InsertActivity">
 
-    <FrameLayout
-        android:id="@+id/frameTitle"
-        android:layout_width="407dp"
-        android:layout_height="10dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameKor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#5E000000"
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/frameKor"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
-        android:background="#00050505"
-        app:layout_constraintBottom_toTopOf="@+id/frameEng"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameTitle">
-
-        <TextView
-            android:id="@+id/textViewKorTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="[Q]"
-            android:textColor="#A6000000"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/editTextKor"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="176dp"
-            android:layout_marginTop="35dp"
-            android:background="#003D5854"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:textColor="#A6000000" />
-    </FrameLayout>
+            android:layout_height="30dp"
+            android:gravity="top"
+            android:orientation="vertical"></LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/frameEng"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#00000000"
-        app:layout_constraintBottom_toTopOf="@+id/frameButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameKor">
-
-        <TextView
-            android:id="@+id/textViewEng"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="[A]"
-            android:textColor="#A6000000"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/editTextEng"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="177dp"
-            android:layout_marginTop="35dp"
-            android:background="#003D5854"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:textColor="#A6000000" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/frameButton"
-        android:layout_width="407dp"
-        android:layout_height="176dp"
-        android:background="#00000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameEng">
-
-        <Button
-            android:id="@+id/buttonAdd"
-            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="110dp"
-            android:background="#3D5854"
-            android:text="저장"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+            android:gravity="top"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textViewStartDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="85dp"
-            android:layout_marginTop="10dp"
-            android:text="YYYY/MM/DD"
-            android:textSize="18dp" />
+            <TextView
+                android:id="@+id/textViewKorTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="[한글]"
+                android:textColor="#A6FFFFFF"
+                android:textSize="18dp" />
 
-        <TextView
-            android:id="@+id/textViewEndDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="290dp"
-            android:layout_marginTop="10dp"
-            android:text="YYYY/MM/DD"
-            android:textSize="18dp" />
+            <EditText
+                android:id="@+id/editTextKor"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:textColor="#A6FFFFFF"
+                android:textSize="15dp" />
 
-        <Button
-            android:id="@+id/buttonTime"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
-            android:background="#3D5854"
-            android:text="알림"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+            <TextView
+                android:id="@+id/textViewEng"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:text="[영어]"
+                android:textColor="#A6FFFFFF"
+                android:textSize="18dp" />
 
-        <TextView
-            android:id="@+id/textViewTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="85dp"
-            android:layout_marginTop="62dp"
-            android:text="HH:MM"
-            android:textSize="18sp" />
+            <EditText
+                android:id="@+id/editTextEng"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:textColor="#A6FFFFFF"
+                android:textSize="15dp" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/buttonStartDate"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:background="#3D5854"
-            android:text="시작"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonEndDate"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="205dp"
-            android:background="#3D5854"
-            android:text="종료"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+            <TextView
+                android:id="@+id/textViewRecord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:text="Record"
+                android:textColor="#A6FFFFFF" />
 
-        <TextView
-            android:id="@+id/textViewRecord"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginLeft="210dp"
-            android:layout_marginTop="62dp"
-            android:text="Record" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonDelete"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="260dp"
-            android:layout_marginTop="110dp"
-            android:background="#3D5854"
-            android:text="삭제"
-            android:textSize="20dp" />
+                <Button
+                    android:id="@+id/buttonStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:background="#3D5854"
+                    android:text="시작일자" />
 
-    </FrameLayout>
+                <TextView
+                    android:id="@+id/textViewStartDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:text="YYYY/MM/DD"
+                    android:textColor="#A6FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:background="#3D5854"
+                    android:text="종료일자" />
+
+                <TextView
+                    android:id="@+id/textViewEndDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:text="YYYY/MM/DD"
+                    android:textColor="#A6FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:background="#3D5854"
+                    android:text="알림시간" />
+
+                <TextView
+                    android:id="@+id/textViewTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="70dp"
+                    android:layout_weight="1"
+                    android:text="HH:MM"
+                    android:textColor="#A6FFFFFF"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:background="#3D5854"
+                    android:text="저장" />
+
+                <Button
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="#3D5854"
+                    android:text="삭제" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

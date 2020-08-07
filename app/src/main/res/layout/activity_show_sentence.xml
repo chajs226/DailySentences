@@ -6,139 +6,118 @@
     android:layout_height="match_parent"
     tools:context=".ShowSentenceActivity">
 
-    <FrameLayout
-        android:id="@+id/frameInfo"
-        android:layout_width="413dp"
-        android:layout_height="10dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameKor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/frameKor"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/framEng"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameInfo">
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:background="#5E000000"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
 
         <TextView
             android:id="@+id/textViewKorTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="[Q]"
-            android:textSize="24sp" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:text="[문제]"
+            android:textColor="#A6FFFFFF"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/textViewKorSentence"
             android:layout_width="match_parent"
             android:layout_height="210dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
+            android:textColor="#A6FFFFFF"
             android:textSize="16dp" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/framEng"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameFunc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameKor">
 
         <TextView
             android:id="@+id/textViewEngTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="[A]"
-            android:textSize="24sp" />
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:text="[정답]"
+            android:textColor="#A6FFFFFF"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/textViewEngSentence"
             android:layout_width="match_parent"
             android:layout_height="210dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
             android:scrollbars="vertical"
-            android:textSize="16dp"
-            android:visibility="invisible" />
-    </FrameLayout>
+            android:scrollHorizontally="false"
+            android:textColor="#A6FFFFFF"
+            android:textSize="16dp" />
 
-    <FrameLayout
-        android:id="@+id/frameFunc"
-        android:layout_width="410dp"
-        android:layout_height="149dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/framEng">
-
-        <Button
-            android:id="@+id/buttonViewAll"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="72dp"
-            android:background="#3D5854"
-            android:text="CHECK"
-            android:textSize="20dp" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonSucess"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="10dp"
-            android:background="#3D5854"
-            android:text="PASS"
-            android:textSize="20dp" />
+            <Button
+                android:id="@+id/buttonViewAll"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="#3D5854"
+                android:text="Check" />
 
-        <Button
-            android:id="@+id/buttonFail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="10dp"
-            android:background="#3D5854"
-            android:text="FAIL"
-            android:textSize="20dp" />
+            <Button
+                android:id="@+id/buttonSucess"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="#3D5854"
+                android:text="PASS" />
 
-        <Button
-            android:id="@+id/buttonSkip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="300dp"
-            android:layout_marginTop="10dp"
-            android:background="#3D5854"
-            android:text="SKIP"
-            android:textSize="20dp" />
+            <Button
+                android:id="@+id/buttonFail"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="#3D5854"
+                android:text="FAIL" />
+
+            <Button
+                android:id="@+id/buttonSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="#3D5854"
+                android:text="SKIP" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/buttonClose"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
             android:background="#3D5854"
-            android:text="닫기"
-            android:textSize="20dp" />
-    </FrameLayout>
-
+            android:text="닫기" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

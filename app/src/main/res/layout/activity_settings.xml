@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
+        android:background="#5E000000"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
@@ -26,19 +27,21 @@
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:text="자동알람"
-                android:textSize="30dp" />
+                android:textColor="#A6FFFFFF"
+                android:textSize="20dp" />
 
             <ToggleButton
                 android:id="@+id/toggleButtonAlarm"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:background="#3D5854"
+                android:shadowColor="#6BBEBCBC"
                 android:text="ToggleButton"
                 android:textOff="OFF"
                 android:textOn="ON"
-                android:textSize="20dp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <TextView
@@ -48,7 +51,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:text="알람허용시간"
-            android:textSize="25dp" />
+            android:textColor="#A6FFFFFF"
+            android:textSize="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,13 +62,13 @@
             <Button
                 android:id="@+id/buttonFromT"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="0.3"
                 android:background="#3D5854"
                 android:text="FROM"
-                android:textSize="20dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/textViewFromT"
@@ -74,17 +78,18 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:text="HH:MM"
-                android:textSize="25dp" />
+                android:textColor="#A6FFFFFF"
+                android:textSize="20dp" />
 
             <Button
                 android:id="@+id/buttonToT"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="0.3"
                 android:background="#3D5854"
                 android:text="TO"
-                android:textSize="20dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/textViewToT"
@@ -95,7 +100,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 android:text="HH:MM"
-                android:textSize="25dp" />
+                android:textColor="#A6FFFFFF"
+                android:textSize="20dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,7 +117,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="4"
                 android:text="하루알람횟수"
-                android:textSize="25dp" />
+                android:textColor="#A6FFFFFF"
+                android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/editTextCount"
@@ -123,7 +130,7 @@
                 android:layout_weight="2"
                 android:ems="10"
                 android:inputType="number"
-                android:textColor="#9C837F7F"
+                android:textColor="#A6FFFFFF"
                 android:textSize="20dp" />
 
             <TextView
@@ -135,6 +142,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="0.01"
                 android:text="회"
+                android:textColor="#A6FFFFFF"
                 android:textSize="20dp" />
         </LinearLayout>
 
@@ -146,13 +154,13 @@
             <Button
                 android:id="@+id/buttonSave"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
                 android:background="#3D5854"
                 android:text="저장"
-                android:textSize="20dp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>

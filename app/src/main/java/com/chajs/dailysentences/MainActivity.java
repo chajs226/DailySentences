@@ -20,13 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
     Sentence sentence;
 
     Button btnInsert;
-    Button btnShow;
-    Button btnTestNoti;
+    //Button btnShow;
+    //Button btnTestNoti;
     Button btnList;
-    Button btnAlarmStart;
-    Button btnAlarmStop;
+    //Button btnAlarmStart;
+    //Button btnAlarmStop;
     Button btnSettings;
-    TextView txtNotiTime;
-    static TextView txtAlarmStat;
+    //TextView txtNotiTime;
+    //static TextView txtAlarmStat;
 
     NotificationManager notificationManager;
     NotificationCompat.Builder builder;
@@ -65,27 +60,27 @@ public class MainActivity extends AppCompatActivity {
         myDb = new DatabaseHelper(this);
 
         btnInsert = (Button) findViewById(R.id.buttonInsert);
-        btnShow = (Button) findViewById(R.id.buttonVeiwAll);
-        btnTestNoti = (Button) findViewById(R.id.buttonNoti);
-        btnTestNoti.setVisibility(View.INVISIBLE);
+        //btnShow = (Button) findViewById(R.id.buttonVeiwAll);
+        //btnTestNoti = (Button) findViewById(R.id.buttonNoti);
+        //btnTestNoti.setVisibility(View.INVISIBLE);
         btnList = (Button) findViewById(R.id.buttonLoadList);
-        btnAlarmStart = (Button)findViewById(R.id.buttonAlarmStart);
-        btnAlarmStop = (Button)findViewById(R.id.buttonAlarmStop);
+        //btnAlarmStart = (Button)findViewById(R.id.buttonAlarmStart);
+        //btnAlarmStop = (Button)findViewById(R.id.buttonAlarmStop);
         btnSettings = (Button)findViewById(R.id.buttonSettings);
 
-        txtNotiTime = (TextView) findViewById(R.id.textViewNotiTime);
-        txtAlarmStat = (TextView) findViewById(R.id.textViewAlarmStat);
+        //txtNotiTime = (TextView) findViewById(R.id.textViewNotiTime);
+        //txtAlarmStat = (TextView) findViewById(R.id.textViewAlramStat);
 
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
         //이벤트 함수
         OpenInsertActivity();
-        OpenShowSentenceActivity();
+        //OpenShowSentenceActivity();
         OpenListActivity();
         OpenSettingsActivity();
-        TestNoti();
-        AlarmStart();
-        AlarmStop();
+        //TestNoti();
+        //AlarmStart();
+        //AlarmStop();
 
         //알람 자동 실행
         AlarmRegister();
@@ -93,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /*
     public void AlarmStart() {
         btnAlarmStart.setOnClickListener(
                 new View.OnClickListener() {
@@ -103,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+*/
 
+    /*
     public void AlarmStop() {
         btnAlarmStop.setOnClickListener(
                 new View.OnClickListener() {
@@ -114,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+*/
 
     public void AlarmRegister() {
         String autoAlarmYN;
@@ -196,9 +195,9 @@ public class MainActivity extends AppCompatActivity {
                 notiTimes.append(String.valueOf(randomValue / 60) + ":" + String.valueOf(randomValue % 60) + " ");
             }
         }
-        txtNotiTime.setText(notiTimes.toString());
+        //txtNotiTime.setText(notiTimes.toString());
         Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
-        txtAlarmStat.setText("Alarm Registered");
+        //txtAlarmStat.setText("Alarm Registered");
     }
 
     public void AlarmRegisterByManual() {
@@ -232,9 +231,9 @@ public class MainActivity extends AppCompatActivity {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
             notiTimes.append(res.getString(1) + " ");
         }
-        txtAlarmStat.setText("Alarm Registered");
+        //txtAlarmStat.setText("Alarm Registered");
         Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
-        txtAlarmStat.setText("Alarm Registered");
+        //txtAlarmStat.setText("Alarm Registered");
     }
 
     public void AlarmUnregister() {
@@ -242,9 +241,10 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
         alarmManager.cancel(pIntent);
         Toast.makeText(this, "Alarm Unregistered", Toast.LENGTH_LONG).show();
-        txtAlarmStat.setText("Alarm Unregistered");
+        //txtAlarmStat.setText("Alarm Unregistered");
     }
 
+    /*
     public void TestNoti() {
         btnTestNoti.setOnClickListener(
                 new View.OnClickListener() {
@@ -255,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+     */
 
     public void showNotificationTest(Sentence sentence) {
         builder = null;
@@ -288,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+/*
     public void LoadSentenceForNotiUsingTimerTest() {
         Cursor res = myDb.getNotiData();
 
@@ -318,6 +319,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+ */
+
     public void OpenInsertActivity() {
         btnInsert.setOnClickListener(
                 new View.OnClickListener() {
@@ -330,6 +333,7 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    /*
     public void OpenShowSentenceActivity() {
         btnShow.setOnClickListener(
                 new View.OnClickListener() {
@@ -341,6 +345,8 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+
+     */
 
     public void OpenListActivity() {
         btnList.setOnClickListener(
