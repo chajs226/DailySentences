@@ -7,6 +7,7 @@ public class Sentence  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public String id;
+    public String keyword;
     public String korSentence;
     public String engSentence;
     public String startDate;
@@ -17,8 +18,9 @@ public class Sentence  implements Serializable {
     public String skipCount;
     public String point;
 
-    public Sentence(String id, String korSentence, String engSentence, String startDate, String endDate, String popupTime, String sucessCount, String failCount, String skipCount, String point) {
+    public Sentence(String id, String keyword, String korSentence, String engSentence, String startDate, String endDate, String popupTime, String sucessCount, String failCount, String skipCount, String point) {
         this.id = id;
+        this.keyword = keyword;
         this.korSentence = korSentence;
         this.engSentence = engSentence;
         this.startDate = startDate;
@@ -36,6 +38,14 @@ public class Sentence  implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public String getKorSentence() {

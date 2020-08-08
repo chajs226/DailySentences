@@ -20,13 +20,14 @@ import static com.chajs.dailysentences.ContactDBctrl.COL_6;
 import static com.chajs.dailysentences.ContactDBctrl.COL_7;
 import static com.chajs.dailysentences.ContactDBctrl.COL_8;
 import static com.chajs.dailysentences.ContactDBctrl.COL_9;
+import static com.chajs.dailysentences.ContactDBctrl.COL_10;
 import static com.chajs.dailysentences.ContactDBctrl.TABLE_NAME;
 import static com.chajs.dailysentences.ContactDBctrl.SET_TABLE_NAME;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Mysentences.db";
-    public static final int DB_VERSION = 5;
+    public static final int DB_VERSION = 6;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
@@ -59,14 +60,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String kor_sentence, String eng_sentence, String start_date, String end_date, String popup_time) {
+    public boolean insertData(String keyword, String kor_sentence, String eng_sentence, String start_date, String end_date, String popup_time) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, kor_sentence);
-        contentValues.put(COL_3, eng_sentence);
-        contentValues.put(COL_4, start_date);
-        contentValues.put(COL_5, end_date);
-        contentValues.put(COL_6, popup_time);
+        contentValues.put(COL_2, keyword);
+        contentValues.put(COL_3, kor_sentence);
+        contentValues.put(COL_4, eng_sentence);
+        contentValues.put(COL_5, start_date);
+        contentValues.put(COL_6, end_date);
+        contentValues.put(COL_7, popup_time);
         Log.d("insertData Before: ","before");
         long result = db.insert(TABLE_NAME, null, contentValues);
         Log.d("insertData After: ","after");
@@ -101,15 +103,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean updateData(String id, String kor_sentence, String eng_sentence, String start_date, String end_date, String popup_time) {
+    public boolean updateData(String id, String keyword, String kor_sentence, String eng_sentence, String start_date, String end_date, String popup_time) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_1, id);
-        contentValues.put(COL_2, kor_sentence);
-        contentValues.put(COL_3, eng_sentence);
-        contentValues.put(COL_4, start_date);
-        contentValues.put(COL_5, end_date);
-        contentValues.put(COL_6, popup_time);
+        contentValues.put(COL_2, keyword);
+        contentValues.put(COL_3, kor_sentence);
+        contentValues.put(COL_4, eng_sentence);
+        contentValues.put(COL_5, start_date);
+        contentValues.put(COL_6, end_date);
+        contentValues.put(COL_7, popup_time);
         db.update(TABLE_NAME, contentValues, "id = ?", new String[] {id});
         return true;
     }
@@ -125,17 +128,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         if (recordType == "S") {
             contentValues.put(COL_1, id);
-            contentValues.put(COL_7, recordUpdate);
+            contentValues.put(COL_8, recordUpdate);
             db.update(TABLE_NAME, contentValues, "id = ?", new String[] {id});
         }
         else if (recordType == "F") {
             contentValues.put(COL_1, id);
-            contentValues.put(COL_8, recordUpdate);
+            contentValues.put(COL_9, recordUpdate);
             db.update(TABLE_NAME, contentValues, "id = ?", new String[] {id});
         }
         else if (recordType == "K") {
             contentValues.put(COL_1, id);
-            contentValues.put(COL_9, recordUpdate);
+            contentValues.put(COL_10, recordUpdate);
             db.update(TABLE_NAME, contentValues, "id = ?", new String[] {id});
         }
         return true;

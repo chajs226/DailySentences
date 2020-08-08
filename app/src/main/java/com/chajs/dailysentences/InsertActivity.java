@@ -26,7 +26,7 @@ public class InsertActivity extends AppCompatActivity {
     int mFromYear, mFromMonth, mFromDay, mToYear, mToMonth, mToDay, mHour, mMinute;
 
     DatabaseHelper myDb = null;
-    EditText editKor, editEng;
+    EditText editKor, editEng, editKeyword;
     Button btnAddData;
     Button btnDeleteData;
     boolean tableExists = false;
@@ -51,6 +51,8 @@ public class InsertActivity extends AppCompatActivity {
         actionBar.setTitle("문장 등록");
 
         myDb = new DatabaseHelper(this);
+
+        editKeyword = (EditText)findViewById(R.id.editTextKeyword);
 
         editKor = (EditText)findViewById(R.id.editTextKor);
         editEng = (EditText)findViewById(R.id.editTextEng);
@@ -110,6 +112,7 @@ public class InsertActivity extends AppCompatActivity {
             txtRecord.setText("Success:" + sentence.getSucessCount() + " " +
                     "Fail:" + sentence.getFailCount() + " " +
                     "Skip:" + sentence.getSkipCount());
+            editKeyword.setText(sentence.getKeyword());
             editKor.setText(sentence.getKorSentence());
             editEng.setText(sentence.getEngSentence());
         }
@@ -160,7 +163,7 @@ public class InsertActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if(id == null) {
-                            boolean isInserted = myDb.insertData(editKor.getText().toString(),
+                            boolean isInserted = myDb.insertData(editKeyword.getText().toString(), editKor.getText().toString(),
                                     editEng.getText().toString(), txtStartDate.getText().toString(), txtEndDate.getText().toString(), txtTime.getText().toString());
                             if (isInserted == true)
                                 Toast.makeText(InsertActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
@@ -168,7 +171,7 @@ public class InsertActivity extends AppCompatActivity {
                                 Toast.makeText(InsertActivity.this, "Data not Inserted", Toast.LENGTH_LONG).show();
                         }
                         else {
-                            boolean isUpdated = myDb.updateData(id, editKor.getText().toString(),
+                            boolean isUpdated = myDb.updateData(id, editKeyword.getText().toString(), editKor.getText().toString(),
                                     editEng.getText().toString(), txtStartDate.getText().toString(), txtEndDate.getText().toString(), txtTime.getText().toString());
                             if (isUpdated == true)
                                 Toast.makeText(InsertActivity.this, "Data Updated", Toast.LENGTH_LONG).show();
