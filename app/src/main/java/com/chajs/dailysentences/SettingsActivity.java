@@ -30,6 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
     TextView TextViewCount;
     TextView TextViewHoi;
     EditText EditTextAlarmCount;
+    TextView TextViewNotiTime;
     int mHour, mMinute;
 
     Settings settings;
@@ -52,7 +53,10 @@ public class SettingsActivity extends AppCompatActivity {
         TextViewCount = (TextView)findViewById(R.id.textViewCount);
         TextViewHoi = (TextView)findViewById(R.id.textViewHoi);
         EditTextAlarmCount = (EditText)findViewById(R.id.editTextCount);
+        TextViewNotiTime = (TextView)findViewById(R.id.textViewNotiTime);
 
+        Bundle extras = getIntent().getExtras();
+        TextViewNotiTime.setText(extras.getString("notiTimes"));
 
         SetAutoArlam();
         SaveSettings();

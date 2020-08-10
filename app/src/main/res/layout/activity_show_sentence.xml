@@ -15,11 +15,31 @@
         tools:layout_editor_absoluteY="1dp">
 
         <TextView
+            android:id="@+id/textViewKeyTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="3dp"
+            android:text="[키워드]"
+            android:textColor="#A6FFFFFF"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/textViewKeyword"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="15dp"
+            android:textColor="#A6FFFFFF"
+            android:textSize="16dp" />
+
+        <TextView
             android:id="@+id/textViewKorTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
             android:text="[문제]"
             android:textColor="#A6FFFFFF"
@@ -28,9 +48,9 @@
         <TextView
             android:id="@+id/textViewKorSentence"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="130dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginRight="15dp"
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
@@ -42,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
             android:text="[정답]"
             android:textColor="#A6FFFFFF"
@@ -51,14 +71,15 @@
         <TextView
             android:id="@+id/textViewEngSentence"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="130dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:layout_marginRight="15dp"
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
             android:textColor="#A6FFFFFF"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"

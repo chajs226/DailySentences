@@ -37,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
     //Button btnAlarmStart;
     //Button btnAlarmStop;
     Button btnSettings;
-    //TextView txtNotiTime;
+    TextView txtNotiTime;
     //static TextView txtAlarmStat;
+    StringBuilder notiTimes;
 
     NotificationManager notificationManager;
     NotificationCompat.Builder builder;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         btnSettings = (Button)findViewById(R.id.buttonSettings);
 
         //txtNotiTime = (TextView) findViewById(R.id.textViewNotiTime);
+
         //txtAlarmStat = (TextView) findViewById(R.id.textViewAlramStat);
 
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
@@ -157,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
 
         Integer fromTimeMin, toTimeMin;
         Integer countpereach;
-        StringBuilder notiTimes = new StringBuilder("");
 
         fromTimeMin = Integer.parseInt(fromTime.split(":")[0]) * 60 + Integer.parseInt(fromTime.split(":")[1]);
         toTimeMin = Integer.parseInt(toTime.split(":")[0]) * 60 + Integer.parseInt(toTime.split(":")[1]);
@@ -173,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Calendar calendar = Calendar.getInstance();
+        notiTimes = new StringBuilder("Noti Times: ");
 
         while (res.moveToNext()) {
             for (int i = 0; i < countpereach; i++) {
@@ -195,14 +197,12 @@ public class MainActivity extends AppCompatActivity {
                 notiTimes.append(String.valueOf(randomValue / 60) + ":" + String.valueOf(randomValue % 60) + " ");
             }
         }
-        //txtNotiTime.setText(notiTimes.toString());
         Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
         //txtAlarmStat.setText("Alarm Registered");
     }
 
     public void AlarmRegisterByManual() {
 
-        StringBuilder notiTimes = new StringBuilder("");
         Cursor res = myDb.getNotiTime();
         Log.d("AlarmRegister", String.valueOf(res.getCount()));
 
@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         String[] hourMinute;
 
+        notiTimes = new StringBuilder("Noti Times: ");
         while (res.moveToNext()) {
             Log.d("AlarmRegister ", "start");
 
@@ -366,6 +367,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                        intent.putExtra("notiTimes", notiTimes.toString());
                         startActivity(intent);
                     }
                 }

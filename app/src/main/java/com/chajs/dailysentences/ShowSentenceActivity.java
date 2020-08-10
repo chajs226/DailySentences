@@ -23,6 +23,7 @@ public class ShowSentenceActivity extends AppCompatActivity {
     Button btnFail;
     Button btnSkip;
 
+    TextView txtKeyword;
     TextView txtKorSentence;
     TextView txtEngSentence;
     String id = null;
@@ -43,10 +44,13 @@ public class ShowSentenceActivity extends AppCompatActivity {
         btnFail = (Button)findViewById(R.id.buttonFail);
         btnSkip = (Button)findViewById(R.id.buttonSkip);
         btnClose = (Button)findViewById(R.id.buttonClose);
+        txtKeyword = (TextView)findViewById(R.id.textViewKeyword);
+        txtKeyword.setMovementMethod((new ScrollingMovementMethod()));
         txtKorSentence = (TextView)findViewById(R.id.textViewKorSentence);
         txtKorSentence.setMovementMethod(new ScrollingMovementMethod());
         txtEngSentence = (TextView)findViewById(R.id.textViewEngSentence);
         txtEngSentence.setMovementMethod(new ScrollingMovementMethod());
+
         viewAll();
         UpdateSuccess();
         UpdateFail();
@@ -74,6 +78,10 @@ public class ShowSentenceActivity extends AppCompatActivity {
         if(sentence.getId() != null) {
             id = sentence.getId();
         }
+        if(sentence.getKeyword() != null) {
+            txtKeyword.setText((sentence.getKeyword()));
+        }
+
         if(sentence.getKorSentence() != null) {
             txtKorSentence.setText(sentence.getKorSentence());
         }

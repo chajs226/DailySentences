@@ -161,6 +161,15 @@
                 android:background="#3D5854"
                 android:text="저장"
                 android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textViewNotiTime"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:textSize="10dp" />
         </LinearLayout>
 
     </LinearLayout>
