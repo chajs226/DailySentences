@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
         TextView txtKCountInfo;
         TextView txtPoint;
         ImageView imgEmoji;
+        Button btnModify;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -36,7 +39,27 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
             this.txtKCountInfo = (TextView) itemView.findViewById(R.id.textViewKCountInfo);
             this.txtPoint = (TextView) itemView.findViewById(R.id.textViewPoint);
             this.imgEmoji = (ImageView) itemView.findViewById(R.id.imageViewEmoji);
+            this.btnModify = (Button)itemView.findViewById(R.id.buttonModify);
 
+            //버튼 클릭 이벤트 처리
+            btnModify.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int pos = getAdapterPosition();
+                            if (pos != RecyclerView.NO_POSITION) {
+
+                                Sentence sentence = mySentenceList.get(pos);
+                                Log.d("SentenceAdapter","position: " + String.valueOf(pos));
+                                Log.d("SentenceAdapter","kor: " + sentence.getKorSentence());
+
+                                Intent intent = new Intent(v.getContext(), InsertActivity.class);
+                                intent.putExtra("sentence", sentence);
+                                v.getContext().startActivity(intent);
+                            }
+                        }
+                    }
+            );
             //아이템 클릭 이벤트 처리
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -48,10 +71,23 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
                         Log.d("SentenceAdapter","position: " + String.valueOf(pos));
                         Log.d("SentenceAdapter","kor: " + sentence.getKorSentence());
 
+                        Intent intent = new Intent(v.getContext(), ShowSentenceActivity.class);
+                        intent.putExtra("sentence", sentence);
+                        v.getContext().startActivity(intent);
+                    }
+                    /*
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+
+                        Sentence sentence = mySentenceList.get(pos);
+                        Log.d("SentenceAdapter","position: " + String.valueOf(pos));
+                        Log.d("SentenceAdapter","kor: " + sentence.getKorSentence());
+
                         Intent intent = new Intent(v.getContext(), InsertActivity.class);
                         intent.putExtra("sentence", sentence);
                         v.getContext().startActivity(intent);
                     }
+                     */
                 }
             });
         }
