@@ -78,9 +78,9 @@ public class ContactDBctrl {
             " WHERE ID = ?";
 
     //전체 문장 기록, 합계
-    public static final String SQL_SELECT_STATICS_SUM = "SELECT SUM(IFNULL(SUCCESS_COUNT,'0')), SUM(IFNULL(FAIL_COUNT,'0')), SUM(IFNULL(SKIP_COUNT,'0')), " +
-            "SUM(IFNULL(SUCCESS_COUNT,'0'))*5 + SUM(IFNULL(FAIL_COUNT,'0'))*-1 + SUM(IFNULL(SKIP_COUNT,'0'))*-2 AS 'SUM', " +
-            "(SUM(IFNULL(SUCCESS_COUNT,'0'))*5 + SUM(IFNULL(FAIL_COUNT,'0'))*-1 + SUM(IFNULL(SKIP_COUNT,'0'))*-2)/COUNT(*) AS 'AVER' FROM " + TABLE_NAME;
+    public static final String SQL_SELECT_STATICS_SUM = "SELECT IFNULL(SUM(SUCCESS_COUNT), 0), IFNULL(SUM(FAIL_COUNT),0), IFNULL(SUM(SKIP_COUNT),0), " +
+            "IFNULL(SUM(SUCCESS_COUNT)*5 + SUM(FAIL_COUNT)*-1 + SUM(SKIP_COUNT)*-2,0) AS 'SUM', " +
+            "IFNULL((SUM(SUCCESS_COUNT)*5 + SUM(FAIL_COUNT)*-1 + SUM(SKIP_COUNT)*-2)/COUNT(*),0) AS 'AVER' FROM " + TABLE_NAME;
 
     //통계 데이터가 있는지 확인
     public static final String SQL_SELECT_TODATE_STATICS = "SELECT ID FROM " + STAT_HISTORY_TABLE_NAME +
