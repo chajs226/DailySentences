@@ -13,6 +13,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ShowSentenceActivity extends AppCompatActivity {
 
@@ -29,6 +33,10 @@ public class ShowSentenceActivity extends AppCompatActivity {
     String id = null;
     private static final String TAG = "ShowSentenceActivity";
     Sentence sentence;
+
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyyMMdd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,9 +132,10 @@ public class ShowSentenceActivity extends AppCompatActivity {
                         Integer recordUpdate = Integer.valueOf(sentence.getSucessCount()) + 1;
                         boolean result = myDb.updateRecord(sentence.getId(), "S", recordUpdate);
                         if(result) {
+                            UpSertStatHistory();
                             finish();
-                            Intent intent = new Intent(v.getContext(), ListActivity.class);
-                            v.getContext().startActivity(intent);
+                            //Intent intent = new Intent(v.getContext(), ListActivity.class);
+                            //v.getContext().startActivity(intent);
                         }
                     }
                 }
@@ -141,9 +150,10 @@ public class ShowSentenceActivity extends AppCompatActivity {
                         Integer recordUpdate = Integer.valueOf(sentence.getFailCount()) + 1;
                         boolean result = myDb.updateRecord(sentence.getId(), "F", recordUpdate);
                         if(result) {
+                            UpSertStatHistory();
                             finish();
-                            Intent intent = new Intent(v.getContext(), ListActivity.class);
-                            v.getContext().startActivity(intent);
+                            //Intent intent = new Intent(v.getContext(), ListActivity.class);
+                            //v.getContext().startActivity(intent);
                         }
                     }
                 }
@@ -158,13 +168,62 @@ public class ShowSentenceActivity extends AppCompatActivity {
                         Integer recordUpdate = Integer.valueOf(sentence.getSkipCount()) + 1;
                         boolean result = myDb.updateRecord(sentence.getId(), "K", recordUpdate);
                         if(result) {
+                            UpSertStatHistory();
                             finish();
-                            Intent intent = new Intent(v.getContext(), ListActivity.class);
-                            v.getContext().startActivity(intent);
+                            //Intent intent = new Intent(v.getContext(), ListActivity.class);
+                            //v.getContext().startActivity(intent);
                         }
                     }
                 }
         );
+    }
+
+    public void UpSertStatHistory() {
+
+        Integer sum_success=0;
+        Integer sum_fail=0;
+        Integer sum_skip=0;
+        Integer sum_point=0;
+        Integer avg_point=0;
+
+        String [] today = new String[] {getToday()};
+
+        Cursor res1 = myDb.getStaticSum();
+        while (res1.moveToNext()) {
+            if (res1.getCount() != 0) {
+                sum_success = res1.getInt(0);
+                sum_fail = res1.getInt(1);
+                sum_skip = res1.getInt(2);
+                sum_point = res1.getInt(3);
+                avg_point = res1.getInt(4);
+            }
+        }
+
+        Cursor res2 = myDb.getTodayStatics(today);
+        if(res2.getCount() == 0) {
+            boolean result = myDb.saveStatsHisotry(today[0],sum_success, sum_fail, sum_skip, sum_point, avg_point, "");
+            if(!result) {
+                Toast.makeText(ShowSentenceActivity.this, "Insert Stat Error", Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            while (res2.moveToNext()) {
+
+                String id = res2.getString(0);
+
+                boolean result = myDb.updateStatsHisotry(id, today[0], sum_success, sum_fail, sum_skip, sum_point, avg_point, "");
+                if(!result) {
+                    Toast.makeText(ShowSentenceActivity.this, "Update Stat Error", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+    }
+
+    private String getToday(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
     }
 
     public void showMessage(String title, String message) {

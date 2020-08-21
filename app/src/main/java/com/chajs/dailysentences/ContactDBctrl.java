@@ -16,6 +16,7 @@ public class ContactDBctrl {
     public static final String COL_10 = "SKIP_COUNT";
 
     public static final String SET_TABLE_NAME = "SETTINGS";
+    public static final String STAT_HISTORY_TABLE_NAME = "STATHIS";
 
     public static final String SQL_CREATE_TB_MYSENTENCE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME  + " " +
             "(" +
@@ -42,12 +43,25 @@ public class ContactDBctrl {
             "EMAIL TEXT" +
             ")";
 
+    public static final String SQL_CREATE_TB_STATHIS = "CREATE TABLE IF NOT EXISTS " + STAT_HISTORY_TABLE_NAME + " " +
+            "(" +
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "STAT_DATE TEXT NOT NULL, " +
+            "SUM_SUCCESS INTEGER, " +
+            "SUM_FAIL INTEGER, " +
+            "SUM_SKIP INTEGER, " +
+            "SUM_POINT INTEGER, " +
+            "AVG_POINT INTEGER, " +
+            "EMAIL TEXT" +
+            ")";
+
     // DROP TABLE IF EXISTS CONTACT_T
     public static final String SQL_DROP_TB_MYSENTENCE = "DROP TABLE IF EXISTS " + TABLE_NAME ;
 
     // DROP TABLE IF EXISTS CONTACT_T
     public static final String SQL_DROP_TB_SETTINGS = "DROP TABLE IF EXISTS " + SET_TABLE_NAME ;
 
+    public static final String SQL_DROP_TB_STATHIS = "DROP TABLE IF EXISTS " + STAT_HISTORY_TABLE_NAME;
     // 테이블 존재 유무 확인
     public static final String SQL_CHECK_EXISTS_TABLE = "SELECT * FROM SQLITE_MASTER WHERE Name = " + TABLE_NAME;
 
@@ -62,6 +76,15 @@ public class ContactDBctrl {
     //ID 로 문장 조회
     public static final String SQL_SELECT_DATA_FROM_ID = "SELECT ID, KEYWORD, KOR_SENTENCE, ENG_SENTENCE, START_DATE, END_DATE, POPUP_TIME, IFNULL(SUCCESS_COUNT,'0'), IFNULL(FAIL_COUNT,'0'), IFNULL(SKIP_COUNT,'0'), IFNULL(SUCCESS_COUNT,'0')*5 + IFNULL(FAIL_COUNT,'0')*-1 + IFNULL(SKIP_COUNT,'0')*-2 AS 'RATI'  FROM " + TABLE_NAME +
             " WHERE ID = ?";
+
+    //전체 문장 기록, 합계
+    public static final String SQL_SELECT_STATICS_SUM = "SELECT SUM(IFNULL(SUCCESS_COUNT,'0')), SUM(IFNULL(FAIL_COUNT,'0')), SUM(IFNULL(SKIP_COUNT,'0')), " +
+            "SUM(IFNULL(SUCCESS_COUNT,'0'))*5 + SUM(IFNULL(FAIL_COUNT,'0'))*-1 + SUM(IFNULL(SKIP_COUNT,'0'))*-2 AS 'SUM', " +
+            "(SUM(IFNULL(SUCCESS_COUNT,'0'))*5 + SUM(IFNULL(FAIL_COUNT,'0'))*-1 + SUM(IFNULL(SKIP_COUNT,'0'))*-2)/COUNT(*) AS 'AVER' FROM " + TABLE_NAME;
+
+    //통계 데이터가 있는지 확인
+    public static final String SQL_SELECT_TODATE_STATICS = "SELECT ID FROM " + STAT_HISTORY_TABLE_NAME +
+            " WHERE STAT_DATE = ?";
 
     public static final String SQL_SELECT_SETTINGS_DATA = "SELECT ID, AUTOARLAM_YN, FROM_TIME, TO_TIME, DAILY_ARLAM_COUNT, USING_SERVER_YN, EMAIL FROM " + SET_TABLE_NAME;
     // SELECT * FROM CONTACT_T

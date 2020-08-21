@@ -11,6 +11,7 @@ import android.graphics.Movie;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class ListActivity extends AppCompatActivity {
     private ArrayList<Sentence> sentenceList;
     DatabaseHelper myDb = null;
 
+    TextView txtViewStaticsSum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class ListActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("등록 리스트");
 
+        txtViewStaticsSum = (TextView)findViewById(R.id.textViewStatics);
         myDb = new DatabaseHelper(this);
         this.InitializeData();
     }
@@ -54,6 +57,12 @@ public class ListActivity extends AppCompatActivity {
 
     public void InitializeData()
     {
+        LoadStaticsSum();
+        LoadList();
+    }
+
+    public void LoadList()
+    {
         sentenceList = new ArrayList<>();
 
         Cursor res = myDb.getAllData();
@@ -69,13 +78,25 @@ public class ListActivity extends AppCompatActivity {
                         res.getString(5), res.getString(6),
                         res.getString(7), res.getString(8),
                         res.getString(9), res.getString(10)));
-                }
+            }
         }
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.RecyclerViewList);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager); // LayoutManager 등록
         recyclerView.setAdapter(new SentenceAdapter(sentenceList));  // Adapter 등록
+    }
 
+    public void LoadStaticsSum()
+    {
+        Cursor res = myDb.getStaticSum();
+        if(res.getCount() == 0) {
+            ;
+        }
+        else {
+            while (res.moveToNext()) {
+                txtViewStaticsSum.setText("총점: " + res.getString(3) + " | 평균: " + res.getString(4)  +" | 성공: " + res.getString(0) + " 실패: " + res.getString(1) + " 스킵: " + res.getString(2));
+            }
+        }
     }
 }

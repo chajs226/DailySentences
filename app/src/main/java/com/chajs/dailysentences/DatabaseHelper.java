@@ -21,13 +21,14 @@ import static com.chajs.dailysentences.ContactDBctrl.COL_7;
 import static com.chajs.dailysentences.ContactDBctrl.COL_8;
 import static com.chajs.dailysentences.ContactDBctrl.COL_9;
 import static com.chajs.dailysentences.ContactDBctrl.COL_10;
+import static com.chajs.dailysentences.ContactDBctrl.STAT_HISTORY_TABLE_NAME;
 import static com.chajs.dailysentences.ContactDBctrl.TABLE_NAME;
 import static com.chajs.dailysentences.ContactDBctrl.SET_TABLE_NAME;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Mysentences.db";
-    public static final int DB_VERSION = 6;
+    public static final int DB_VERSION = 7;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
@@ -41,6 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("onCreate Before: ","before");
         db.execSQL(ContactDBctrl.SQL_CREATE_TB_MYSENTENCE);
         db.execSQL(ContactDBctrl.SQL_CREATE_TB_SETTINGS);
+        db.execSQL(ContactDBctrl.SQL_CREATE_TB_STATHIS);
         Log.d("onCreate After: ","after");
     }
 
@@ -57,6 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(ContactDBctrl.SQL_DROP_TB_MYSENTENCE);
         db.execSQL(ContactDBctrl.SQL_DROP_TB_SETTINGS);
+        db.execSQL(ContactDBctrl.SQL_DROP_TB_STATHIS);
         onCreate(db);
     }
 
@@ -100,6 +103,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getNotiData() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery(ContactDBctrl.SQL_SELECT_NOTI_DATA, null);
+        return res;
+    }
+
+    public Cursor getStaticSum() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery(ContactDBctrl.SQL_SELECT_STATICS_SUM, null);
         return res;
     }
 
@@ -174,6 +183,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("EMAIL", email);
         db.update(SET_TABLE_NAME, contentValues, "id = ?", new String[] {id});
         return true;
+    }
+
+    public boolean saveStatsHisotry(String stat_date, Integer sum_sucess, Integer sum_fail, Integer sum_skip, Integer sum_point, Integer avg_point, String email ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("STAT_DATE", stat_date);
+        contentValues.put("SUM_SUCCESS", sum_sucess);
+        contentValues.put("SUM_FAIL", sum_fail);
+        contentValues.put("SUM_SKIP", sum_skip);
+        contentValues.put("SUM_POINT", sum_point);
+        contentValues.put("AVG_POINT", avg_point);
+        contentValues.put("EMAIL", email);
+        Log.d("insertData Before: ","before");
+        long result = db.insert(STAT_HISTORY_TABLE_NAME, null, contentValues);
+        Log.d("insertData After: ","after");
+        Log.d("result: ", String.valueOf(result));
+        if(result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean updateStatsHisotry(String id, String stat_date, Integer sum_sucess, Integer sum_fail, Integer sum_skip, Integer sum_point, Integer avg_point, String email ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("STAT_DATE", stat_date);
+        contentValues.put("SUM_SUCCESS", sum_sucess);
+        contentValues.put("SUM_FAIL", sum_fail);
+        contentValues.put("SUM_SKIP", sum_skip);
+        contentValues.put("SUM_POINT", sum_point);
+        contentValues.put("AVG_POINT", avg_point);
+        contentValues.put("EMAIL", email);
+        db.update(STAT_HISTORY_TABLE_NAME, contentValues, "id = ?", new String[] {id});
+        return true;
+    }
+
+    public Cursor getTodayStatics(String[] today) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery(ContactDBctrl.SQL_SELECT_TODATE_STATICS, today);
+        return res;
     }
 
     public Cursor getSettingData() {
