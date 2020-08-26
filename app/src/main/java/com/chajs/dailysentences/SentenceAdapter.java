@@ -135,13 +135,18 @@ public class SentenceAdapter extends RecyclerView.Adapter<SentenceAdapter.MyView
         TextView textPoint = holder.txtPoint;
         ImageView imageEmoji = holder.imgEmoji;
 
+        /*
         textDateInfo.setText("Noti time: " + mySentenceList.get(position).getPopupTime() + "    Duration: " +
                 mySentenceList.get(position).getStartDate() + " - " +
                 mySentenceList.get(position).getEndDate());
+        */
+        textDateInfo.setText("기간: " +
+                mySentenceList.get(position).getStartDate() + " - " +
+                mySentenceList.get(position).getEndDate());
         textSentence.setText(mySentenceList.get(position).getKorSentence());
-        textSCountInfo.setText("Success:" + mySentenceList.get(position).getSucessCount());
-        textFCountInfo.setText("Fail:" + mySentenceList.get(position).getFailCount());
-        textKCountInfo.setText("Skip:" + mySentenceList.get(position).getSkipCount());
+        textSCountInfo.setText("성공:" + mySentenceList.get(position).getSucessCount());
+        textFCountInfo.setText("실패:" + mySentenceList.get(position).getFailCount());
+        textKCountInfo.setText("통과:" + mySentenceList.get(position).getSkipCount());
         textPoint.setText((mySentenceList.get(position).getPoint())+ "Pt");
         if(Integer.parseInt(mySentenceList.get(position).getPoint()) > 10)
             imageEmoji.setImageResource(R.drawable.point_10);

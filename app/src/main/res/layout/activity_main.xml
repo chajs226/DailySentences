@@ -91,7 +91,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="50dp"
                 android:gravity="right"
-                android:text="v.2020.08.22.01" />
+                android:text="v.2020.08.26.01" />
 
         </LinearLayout>
     </LinearLayout>

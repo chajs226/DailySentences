@@ -48,13 +48,13 @@ public class MainActivity extends AppCompatActivity {
     private static String CHANEL_NAME = "Chaneel1";
 
 
-    private AlarmManager alarmManager;
+    //private AlarmManager alarmManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d("onCreate","MainActivity");
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         //txtAlarmStat = (TextView) findViewById(R.id.textViewAlramStat);
 
-        alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        //alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
         //이벤트 함수
         OpenInsertActivity();
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         //AlarmStop();
 
         //알람 자동 실행
-        AlarmRegister();
+        //AlarmRegister();
 
 
     }
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
 */
 
+    /*
     public void AlarmRegister() {
         String autoAlarmYN;
         String fromTime;
@@ -237,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
         //txtAlarmStat.setText("Alarm Registered");
     }
 
+
     public void AlarmUnregister() {
         Intent intent = new Intent(this, Alarm.class);
         PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
@@ -244,6 +246,8 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Alarm Unregistered", Toast.LENGTH_LONG).show();
         //txtAlarmStat.setText("Alarm Unregistered");
     }
+
+     */
 
     /*
     public void TestNoti() {
@@ -367,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                        intent.putExtra("notiTimes", notiTimes.toString());
+                        //intent.putExtra("notiTimes", notiTimes.toString());
                         startActivity(intent);
                     }
                 }

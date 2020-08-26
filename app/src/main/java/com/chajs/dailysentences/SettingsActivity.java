@@ -2,7 +2,10 @@ package com.chajs.dailysentences;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +20,7 @@ import android.widget.ToggleButton;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -35,12 +39,15 @@ public class SettingsActivity extends AppCompatActivity {
 
     Settings settings;
     DatabaseHelper myDb = null;
+    static StringBuilder notiTimes;
+
+    private AlarmManager alarmManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
+        Log.d("onCreate","SettingsActivity");
         myDb = new DatabaseHelper(this);
 
         ToBtnAlarmSet = (ToggleButton) findViewById(R.id.toggleButtonAlarm);
@@ -55,8 +62,10 @@ public class SettingsActivity extends AppCompatActivity {
         EditTextAlarmCount = (EditText)findViewById(R.id.editTextCount);
         TextViewNotiTime = (TextView)findViewById(R.id.textViewNotiTime);
 
-        Bundle extras = getIntent().getExtras();
-        TextViewNotiTime.setText(extras.getString("notiTimes"));
+        //Bundle extras = getIntent().getExtras();
+        //TextViewNotiTime.setText(extras.getString("notiTimes"));
+
+        alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
         SetAutoArlam();
         SaveSettings();
@@ -102,6 +111,8 @@ public class SettingsActivity extends AppCompatActivity {
             TextViewFromT.setText(" ");
             TextViewToT.setText(" ");
             EditTextAlarmCount.setText(" ");
+            notiTimes = null;
+            TextViewNotiTime.setText(" ");
         }
 
     }
@@ -228,6 +239,12 @@ public class SettingsActivity extends AppCompatActivity {
                                 Toast.makeText(SettingsActivity.this, "Data not Updated", Toast.LENGTH_LONG).show();
                         }
 
+                        if(isChecked == "Y") {
+                            AlarmRegister();
+                        }
+                        else {
+                            AlarmUnregister();
+                        }
                         finish();
                         onBackPressed();
                     }
@@ -277,6 +294,7 @@ public class SettingsActivity extends AppCompatActivity {
             TextViewFromT.setText(settings.getFromTime());
             TextViewToT.setText(settings.getToTIme());
             EditTextAlarmCount.setText(settings.getDailyArlamCount());
+            TextViewNotiTime.setText(notiTimes);
         }
         else {
             ToBtnAlarmSet.setChecked(false);
@@ -285,5 +303,96 @@ public class SettingsActivity extends AppCompatActivity {
         //InitControls(ToBtnAlarmSet.isChecked());
     }
 
+    public void AlarmRegister() {
+        String autoAlarmYN;
+        String fromTime;
+        String toTime;
+        String count;
 
+        autoAlarmYN = "N";
+        fromTime = "";
+        toTime = "";
+        count = "0";
+
+        Cursor res = myDb.getSettingData();
+        if(res.getCount() == 0) {
+            autoAlarmYN = "N";
+            fromTime = "";
+            toTime = "";
+            count = "0";
+        }
+        else {
+            while (res.moveToNext()) {
+                autoAlarmYN = res.getString(1).toString();
+                fromTime = res.getString(2).toString();
+                toTime = res.getString(3).toString();
+                count = res.getString(4).toString();
+            }
+        }
+
+        Log.d("AlarmRegister",autoAlarmYN);
+        Log.d("AlarmRegister",fromTime);
+        Log.d("AlarmRegister",toTime);
+
+        if(autoAlarmYN.equals("Y")) {
+            AlarmRegisterByAuto(fromTime, toTime, count);
+            TextViewNotiTime.setText(notiTimes);
+        }
+
+    }
+
+    public void AlarmRegisterByAuto(String fromTime, String toTime, String count) {
+
+        Integer fromTimeMin, toTimeMin;
+        Integer countpereach;
+
+        fromTimeMin = Integer.parseInt(fromTime.split(":")[0]) * 60 + Integer.parseInt(fromTime.split(":")[1]);
+        toTimeMin = Integer.parseInt(toTime.split(":")[0]) * 60 + Integer.parseInt(toTime.split(":")[1]);
+
+        countpereach = Integer.parseInt(count);
+
+        Random rand = new Random();
+
+        Cursor res = myDb.getNotiTime();
+        if (res.getCount() == 0) {
+            //showMessage("None","조회내용이 없습니다.");
+            return;
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        notiTimes = new StringBuilder("Noti Times: ");
+
+        while (res.moveToNext()) {
+            for (int i = 0; i < countpereach; i++) {
+                Intent intent = new Intent(this, Alarm.class);
+                intent.putExtra("id", res.getString(0));
+                PendingIntent pIntent = PendingIntent.getBroadcast(this, Integer.valueOf(res.getString(0)), intent, 0);
+
+                int randomValue = rand.nextInt(toTimeMin - fromTimeMin) + fromTimeMin;
+
+                Log.d("NotiTime: ", String.valueOf(randomValue));
+                Log.d("NotiTime: ", String.valueOf(randomValue / 60));
+                Log.d("NotiTime: ", String.valueOf(randomValue % 60));
+
+                calendar.set(Calendar.HOUR_OF_DAY, randomValue / 60);
+                calendar.set(Calendar.MINUTE, randomValue % 60);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
+
+                notiTimes.append(String.valueOf(randomValue / 60) + ":" + String.valueOf(randomValue % 60) + " ");
+            }
+        }
+        Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
+        //txtAlarmStat.setText("Alarm Registered");
+        //return notiTimes.toString();
+    }
+
+    public void AlarmUnregister() {
+        Intent intent = new Intent(this, Alarm.class);
+        PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+        alarmManager.cancel(pIntent);
+        Toast.makeText(this, "Alarm Unregistered", Toast.LENGTH_LONG).show();
+        TextViewNotiTime.setText("");
+    }
 }

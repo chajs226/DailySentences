@@ -95,7 +95,7 @@ public class ListActivity extends AppCompatActivity {
         }
         else {
             while (res.moveToNext()) {
-                txtViewStaticsSum.setText("총점: " + res.getString(3) + " | 평균: " + res.getString(4)  +" | 성공: " + res.getString(0) + " 실패: " + res.getString(1) + " 스킵: " + res.getString(2));
+                txtViewStaticsSum.setText("총점: " + res.getString(3) + " | 평균: " + res.getString(4)  +" | 성공: " + res.getString(0) + " 실패: " + res.getString(1) + " 통과: " + res.getString(2));
             }
         }
     }
