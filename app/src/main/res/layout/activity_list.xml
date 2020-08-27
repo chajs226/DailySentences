@@ -43,6 +43,17 @@
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#00000000"
+                android:gravity="right"
+                android:text="점수계산: 성공 +5 / 실패 -1 / 통과 -3"
+                android:textSize="10dp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/RecyclerViewList"
                 android:layout_width="match_parent"
