@@ -35,6 +35,8 @@ public class ListActivity extends AppCompatActivity {
         txtViewStaticsSum = (TextView)findViewById(R.id.textViewStatics);
         myDb = new DatabaseHelper(this);
         this.InitializeData();
+
+        OpenStatsGraphActivity();
     }
 
     @Override
@@ -99,4 +101,17 @@ public class ListActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void OpenStatsGraphActivity() {
+        txtViewStaticsSum.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), StatsGraphActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+    }
+
 }

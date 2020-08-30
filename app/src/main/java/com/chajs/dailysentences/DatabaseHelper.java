@@ -225,6 +225,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getStaticsforGraph(String[] fromDate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery(ContactDBctrl.SQL_SELECT_STATICS_FOR_GRAPH, fromDate);
+        return res;
+    }
+
     public Cursor getSettingData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery(ContactDBctrl.SQL_SELECT_SETTINGS_DATA,null);

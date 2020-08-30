@@ -86,6 +86,10 @@ public class ContactDBctrl {
     public static final String SQL_SELECT_TODATE_STATICS = "SELECT ID FROM " + STAT_HISTORY_TABLE_NAME +
             " WHERE STAT_DATE = ?";
 
+    //통계 데이터 로드
+    public static final String SQL_SELECT_STATICS_FOR_GRAPH = "SELECT STAT_DATE, AVG_POINT FROM " + STAT_HISTORY_TABLE_NAME +
+            " WHERE STAT_DATE BETWEEN ? AND strftime('%Y%m%d','now','localtime')";
+
     public static final String SQL_SELECT_SETTINGS_DATA = "SELECT ID, AUTOARLAM_YN, FROM_TIME, TO_TIME, DAILY_ARLAM_COUNT, USING_SERVER_YN, EMAIL FROM " + SET_TABLE_NAME;
     // SELECT * FROM CONTACT_T
     //public static final String SQL_SELECT_TB_MYSENTENCE = "SELECT * FROM " + TABLE_NAME ;
