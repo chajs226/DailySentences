@@ -17,6 +17,7 @@ public class ContactDBctrl {
 
     public static final String SET_TABLE_NAME = "SETTINGS";
     public static final String STAT_HISTORY_TABLE_NAME = "STATHIS";
+    public static final String RANDOM_VALUES_TABLE_NAME = "RANDOMVALUES";
 
     public static final String SQL_CREATE_TB_MYSENTENCE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME  + " " +
             "(" +
@@ -55,6 +56,12 @@ public class ContactDBctrl {
             "EMAIL TEXT" +
             ")";
 
+    public static final String SQL_CREATE_TB_RANDOMVALUES = "CREATE TABLE IF NOT EXISTS " + RANDOM_VALUES_TABLE_NAME + " " +
+            "(" +
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "RANDOM_VALUE INTEGER" +
+            ")";
+
     // DROP TABLE IF EXISTS CONTACT_T
     public static final String SQL_DROP_TB_MYSENTENCE = "DROP TABLE IF EXISTS " + TABLE_NAME ;
 
@@ -62,12 +69,17 @@ public class ContactDBctrl {
     public static final String SQL_DROP_TB_SETTINGS = "DROP TABLE IF EXISTS " + SET_TABLE_NAME ;
 
     public static final String SQL_DROP_TB_STATHIS = "DROP TABLE IF EXISTS " + STAT_HISTORY_TABLE_NAME;
+
+    public static final String SQL_DROP_TB_RANDOMVALUES = "DROP TABLE IF EXISTS " + RANDOM_VALUES_TABLE_NAME;
     // 테이블 존재 유무 확인
     public static final String SQL_CHECK_EXISTS_TABLE = "SELECT * FROM SQLITE_MASTER WHERE Name = " + TABLE_NAME;
 
     public static final String SQL_SELECT_ALL_DATA = "SELECT ID, KEYWORD, KOR_SENTENCE, ENG_SENTENCE, START_DATE, END_DATE, POPUP_TIME, IFNULL(SUCCESS_COUNT,'0'), IFNULL(FAIL_COUNT,'0'), IFNULL(SKIP_COUNT,'0'), IFNULL(SUCCESS_COUNT,'0')*5 + IFNULL(FAIL_COUNT,'0')*-1 + IFNULL(SKIP_COUNT,'0')*-3 AS 'RATI'  FROM " + TABLE_NAME + " ORDER BY RATI DESC";
     //Noti 시간
     public static final String SQL_SELECT_NOTI_TIME = "SELECT ID, POPUP_TIME FROM " + TABLE_NAME + " WHERE strftime('%Y/%m/%d', 'now', 'localtime') BETWEEN START_DATE AND END_DATE";
+
+    //RANDOM Noti 시간 조회
+    public static final String SQL_SELECT_RANDOM_VALUES = "SELECT ID, RANDOM_VALUE FROM " + RANDOM_VALUES_TABLE_NAME;
 
     //현재 시간 기준 popup_time 10분 이내의 것들을 조회
     public static final String SQL_SELECT_NOTI_DATA = "SELECT ID, KEYWORD, KOR_SENTENCE, ENG_SENTENCE, START_DATE, END_DATE, POPUP_TIME, IFNULL(SUCCESS_COUNT,'0'), IFNULL(FAIL_COUNT,'0'), IFNULL(SKIP_COUNT,'0'), IFNULL(SUCCESS_COUNT,'0')*5 + IFNULL(FAIL_COUNT,'0')*-1 + IFNULL(SKIP_COUNT,'0')*-3 AS 'RATI'  FROM " + TABLE_NAME +

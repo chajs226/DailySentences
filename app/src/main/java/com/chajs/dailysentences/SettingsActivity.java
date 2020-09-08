@@ -1,5 +1,6 @@
 package com.chajs.dailysentences;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
@@ -47,6 +48,10 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("설정");
+
         Log.d("onCreate","SettingsActivity");
         myDb = new DatabaseHelper(this);
 
@@ -83,6 +88,7 @@ public class SettingsActivity extends AppCompatActivity {
         }));
 
         LoadSettingsData();
+        LoadAlarm();
 
     }
 
@@ -336,7 +342,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         if(autoAlarmYN.equals("Y")) {
             AlarmRegisterByAuto(fromTime, toTime, count);
-            TextViewNotiTime.setText(notiTimes);
+
+            //TextViewNotiTime.setText(notiTimes);
         }
 
     }
@@ -360,7 +367,13 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         Calendar calendar = Calendar.getInstance();
-        notiTimes = new StringBuilder("Noti Times: ");
+
+        //list에 알람시간을 저장하고,, DB에 delete -> insert
+        //알람시간을 TextViewNotiTime에 setText
+        //randomVale 테이블 삭제
+        Boolean delete_rt = myDb.deleteRandomValuess();
+        if(delete_rt == false)
+            Toast.makeText(this, "Alarm Delete Error", Toast.LENGTH_LONG).show();
 
         while (res.moveToNext()) {
             for (int i = 0; i < countpereach; i++) {
@@ -380,13 +393,19 @@ public class SettingsActivity extends AppCompatActivity {
                 calendar.set(Calendar.MILLISECOND, 0);
                 alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pIntent);
 
-                notiTimes.append(String.valueOf(randomValue / 60) + ":" + String.valueOf(randomValue % 60) + " ");
+                //randomValue 테이블 인서트
+                Boolean save_rt = myDb.saveRandomValue(randomValue);
+                if(save_rt == false)
+                    Toast.makeText(this, "Alarm Time Insert Error", Toast.LENGTH_LONG).show();
+
+                //notiTimes.append(String.valueOf(randomValue / 60) + ":" + String.valueOf(randomValue % 60) + " ");
             }
         }
         Toast.makeText(this, "Alarm Registered", Toast.LENGTH_LONG).show();
-        //txtAlarmStat.setText("Alarm Registered");
-        //return notiTimes.toString();
+        LoadAlarm();
+
     }
+
 
     public void AlarmUnregister() {
         Intent intent = new Intent(this, Alarm.class);
@@ -394,5 +413,20 @@ public class SettingsActivity extends AppCompatActivity {
         alarmManager.cancel(pIntent);
         Toast.makeText(this, "Alarm Unregistered", Toast.LENGTH_LONG).show();
         TextViewNotiTime.setText("");
+    }
+
+    public void LoadAlarm() {
+
+        TextViewNotiTime.setText("");
+        notiTimes = new StringBuilder("[Noti Times]\n");
+
+        Cursor res = myDb.getRandomValues();
+        if (res.getCount() != 0) {
+            while (res.moveToNext()) {
+                notiTimes.append(String.valueOf(res.getInt(1) / 60) + ":" + String.valueOf(res.getInt(1) % 60) + "\n");
+            }
+        }
+
+        TextViewNotiTime.setText(notiTimes);
     }
 }

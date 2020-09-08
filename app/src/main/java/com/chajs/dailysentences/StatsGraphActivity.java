@@ -79,7 +79,7 @@ public class StatsGraphActivity extends AppCompatActivity {
     }
 
     public void OneMonthBefore() {
-        btnOneWeekBefore.setOnClickListener(
+        btnOneMonthBefore.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -91,7 +91,7 @@ public class StatsGraphActivity extends AppCompatActivity {
     }
 
     public void ThreeMonthBefore() {
-        btnOneWeekBefore.setOnClickListener(
+        btnThreeMonthBefore.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -135,6 +135,7 @@ public class StatsGraphActivity extends AppCompatActivity {
         else {
 
             xAxisLable.clear();
+            values.clear();
             while (res.moveToNext()) {
                 float val = Float.parseFloat(res.getString(1).toString());
                 //values.add(new Entry(Integer.parseInt(res.getString(0).toString()), val));
@@ -153,7 +154,7 @@ public class StatsGraphActivity extends AppCompatActivity {
         LineDataSet set1;
         set1 = new LineDataSet(values, "평균점수");
         set1.setLineWidth(2); //선굵기
-        set1.setCircleRadius(6); //곡률
+        set1.setCircleRadius(3); //곡률
         //set1.setCircleColor(ContextCompat.getColor(mContext, R.color.graphColor)); // LineChart에서 Line Circle Color 설정
         //set1.setCircleHoleColor(ContextCompat.getColor(mContext, R.color.graphColor)); // LineChart에서 Line Hole Circle Color 설정
         //set1.setColor(ContextCompat.getColor(mContext, R.color.graphColor)); // LineChart에서 Line Color 설정
@@ -165,8 +166,8 @@ public class StatsGraphActivity extends AppCompatActivity {
         LineData data = new LineData(dataSets);
 
         // black lines and points
-        set1.setColor(Color.BLACK);
-        set1.setCircleColor(Color.BLACK);
+        set1.setColor(Color.DKGRAY);
+        set1.setCircleColor(Color.GRAY);
 
         // set data
         chart.setData(data);

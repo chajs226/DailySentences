@@ -37,11 +37,15 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="#00000000"
+                android:clickable="false"
                 android:gravity="center"
+                android:shadowDx="@dimen/material_emphasis_high_type"
+                android:shadowDy="@dimen/material_emphasis_high_type"
                 android:text="Total"
                 android:textAllCaps="false"
                 android:textSize="16dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:typeface="normal" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -58,7 +62,7 @@
                 android:id="@+id/RecyclerViewList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#000000" />
+                android:background="#5EE9E8E8" />
         </LinearLayout>
 
     </FrameLayout>

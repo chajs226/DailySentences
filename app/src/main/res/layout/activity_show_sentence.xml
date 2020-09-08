@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="729dp"
-        android:background="#5E000000"
+        android:background="#5EE9E8E8"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
@@ -20,8 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="3dp"
-            android:text="[키워드]"
-            android:textColor="#A6FFFFFF"
+            android:text="[Keyword]"
+            android:textColor="#A3797878"
             android:textSize="18dp" />
 
         <TextView
@@ -31,8 +31,9 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="3dp"
             android:layout_marginRight="15dp"
-            android:background="#8F8B8A8A"
-            android:textColor="#A6FFFFFF"
+            android:background="#5ECCCACA"
+            android:cursorVisible="true"
+            android:textColor="#A3797878"
             android:textSize="16dp" />
 
         <TextView
@@ -42,8 +43,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
-            android:text="[문제]"
-            android:textColor="#A6FFFFFF"
+            android:text="[Question]"
+            android:textColor="#A3797878"
             android:textSize="18dp" />
 
         <TextView
@@ -53,10 +54,11 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="3dp"
             android:layout_marginRight="15dp"
-            android:background="#8F8B8A8A"
+            android:background="#5ECCCACA"
+            android:cursorVisible="true"
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
-            android:textColor="#A6FFFFFF"
+            android:textColor="#A3797878"
             android:textSize="16dp" />
 
         <TextView
@@ -66,8 +68,8 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="15dp"
-            android:text="[정답]"
-            android:textColor="#A6FFFFFF"
+            android:text="[Answer]"
+            android:textColor="#A3797878"
             android:textSize="18dp" />
 
         <TextView
@@ -77,10 +79,11 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="3dp"
             android:layout_marginRight="15dp"
-            android:background="#8F8B8A8A"
+            android:background="#5ECCCACA"
+            android:cursorVisible="true"
             android:scrollbars="vertical"
             android:scrollHorizontally="false"
-            android:textColor="#A6FFFFFF"
+            android:textColor="#A3797878"
             android:textSize="16dp"
             android:visibility="invisible" />
 
@@ -97,7 +100,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="#3D5854"
+                android:background="#ACACAC"
                 android:text="확인" />
 
             <Button
@@ -108,8 +111,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="#3D5854"
-                android:text="정답" />
+                android:background="#ACACAC"
+                android:text="성공" />
 
             <Button
                 android:id="@+id/buttonFail"
@@ -119,7 +122,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="#3D5854"
+                android:background="#ACACAC"
                 android:text="실패" />
 
             <Button
@@ -130,7 +133,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
-                android:background="#3D5854"
+                android:background="#ACACAC"
                 android:text="통과" />
         </LinearLayout>
 
@@ -141,7 +144,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
-            android:background="#3D5854"
+            android:background="#ACACAC"
             android:text="닫기" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
