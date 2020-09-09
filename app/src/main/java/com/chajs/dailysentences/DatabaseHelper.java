@@ -29,7 +29,7 @@ import static com.chajs.dailysentences.ContactDBctrl.SET_TABLE_NAME;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Mysentences.db";
-    public static final int DB_VERSION = 8;
+    public static final int DB_VERSION = 10;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);

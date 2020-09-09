@@ -114,7 +114,7 @@ public class ShowSentenceActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(txtEngSentence.getVisibility() == View.INVISIBLE)
+                        if(txtEngSentence .getVisibility() == View.INVISIBLE)
                             txtEngSentence.setVisibility(View.VISIBLE);
                         else
                             txtEngSentence.setVisibility(View.INVISIBLE);

@@ -19,6 +19,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
@@ -106,11 +107,19 @@ public class StatsGraphActivity extends AppCompatActivity {
     private String getDate(BEFORE before) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 
+        xAxisLable.clear();
         //오늘날짜 가져오기
         Calendar cal = Calendar.getInstance();
 
         if (before == BEFORE.ONE_WEEK) {
             cal.add(Calendar.DAY_OF_MONTH, -7);
+            /*
+            for (int i=0; i>-7; i--) {
+                cal.add(Calendar.DAY_OF_MONTH, i);
+            }
+            xAxisLable.add(res.getString(0).substring(4,6) + "/" + res.getString(0).toString().substring(6,8));
+            */
+
         }
         else if (before == BEFORE.ONE_MONTH) {
             cal.add(Calendar.MONTH, -1);
@@ -135,6 +144,7 @@ public class StatsGraphActivity extends AppCompatActivity {
         else {
 
             xAxisLable.clear();
+
             values.clear();
             while (res.moveToNext()) {
                 float val = Float.parseFloat(res.getString(1).toString());
@@ -143,6 +153,10 @@ public class StatsGraphActivity extends AppCompatActivity {
                 xAxisLable.add(res.getString(0).substring(4,6) + "/" + res.getString(0).toString().substring(6,8));
                 i++;
                 }
+
+            //for(int i)
+
+            //
         }
         /*
         for (int i = 0; i < 10; i++) {
@@ -177,6 +191,8 @@ public class StatsGraphActivity extends AppCompatActivity {
         xAxis.setTextColor(Color.BLACK);
         xAxis.enableGridDashedLine(8, 24, 0);
 
+        //xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisLable));
+        xAxis.setLabelCount(i);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisLable));
 
 
