@@ -36,7 +36,7 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
-                android:background="#ACACAC"
+                android:background="@drawable/custom_buttons"
                 android:shadowColor="#6BBEBCBC"
                 android:text="ToggleButton"
                 android:textOff="OFF"
@@ -66,7 +66,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="0.3"
-                android:background="#ACACAC"
+                android:background="@drawable/custom_buttons"
                 android:text="FROM"
                 android:textSize="14sp" />
 
@@ -87,7 +87,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="0.3"
-                android:background="#ACACAC"
+                android:background="@drawable/custom_buttons"
                 android:text="TO"
                 android:textSize="14sp" />
 
@@ -158,7 +158,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="15dp"
-                android:background="#ACACAC"
+                android:background="@drawable/custom_buttons"
                 android:text="저장"
                 android:textSize="14sp" />
 

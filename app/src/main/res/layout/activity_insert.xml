@@ -42,7 +42,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="15dp"
-                android:background="#5ECCCACA"
+                android:background="@drawable/custom_keyword"
                 android:cursorVisible="true"
                 android:ems="10"
                 android:gravity="start|top"
@@ -69,7 +69,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="15dp"
-                android:background="#5ECCCACA"
+                android:background="@drawable/custom_keyword"
                 android:cursorVisible="true"
                 android:ems="10"
                 android:gravity="start|top"
@@ -96,7 +96,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="15dp"
-                android:background="#5ECCCACA"
+                android:background="@drawable/custom_keyword"
                 android:cursorVisible="true"
                 android:ems="10"
                 android:gravity="start|top"
@@ -135,7 +135,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:background="#ACACAC"
+                    android:background="@drawable/custom_buttons"
                     android:text="시작일자" />
 
                 <TextView
@@ -164,7 +164,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:background="#ACACAC"
+                    android:background="@drawable/custom_buttons"
                     android:text="종료일자" />
 
                 <TextView
@@ -193,7 +193,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:background="#ACACAC"
+                    android:background="@drawable/custom_buttons"
                     android:text="저장" />
 
                 <Button
@@ -204,7 +204,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:background="#ACACAC"
+                    android:background="@drawable/custom_buttons"
                     android:text="삭제" />
             </LinearLayout>
 

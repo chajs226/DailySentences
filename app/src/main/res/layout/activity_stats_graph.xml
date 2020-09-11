@@ -31,7 +31,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
-                android:background="#ACACAC"
+                android:background="@drawable/custom_buttons"
                 android:text="1주일" />
 
             <Button
@@ -42,7 +42,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:background="#ACACAC"
+                android:background="@drawable/custom_buttons"
                 android:text="1개월" />
 
             <Button
@@ -52,7 +52,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
-                android:background="#ACACAC"
+                android:background="@drawable/custom_buttons"
                 android:text="3개월" />
         </LinearLayout>
 
