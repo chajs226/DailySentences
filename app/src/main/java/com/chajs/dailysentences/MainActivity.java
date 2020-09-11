@@ -20,6 +20,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -47,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private static String CHANNEL_ID = "channel1";
     private static String CHANEL_NAME = "Chaneel1";
 
+    private AdView mAdView;
 
     //private AlarmManager alarmManager;
 
@@ -54,6 +61,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         Log.d("onCreate","MainActivity");
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();

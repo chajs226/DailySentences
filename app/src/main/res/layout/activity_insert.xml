@@ -108,7 +108,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -191,7 +191,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:background="#ACACAC"
                     android:text="저장" />
@@ -239,6 +239,22 @@
                     android:visibility="invisible" />
             </LinearLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!--test ad Unit: ca-app-pub-3940256099942544/6300978111 -->
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                app:adSize="BANNER"
+                app:adUnitId="ca-app-pub-2285927489635967/2929695371"></com.google.android.gms.ads.AdView>
         </LinearLayout>
     </LinearLayout>
 

@@ -23,6 +23,11 @@
         </activity>
 
         <receiver android:name=".Alarm" />
+        <!-- Sample AdMob App ID: ca-app-pub-3940256099942544~3347511713 -->
+        <!-- my AdMob App ID: ca-app-pub-2285927489635967~1289773668 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2285927489635967~1289773668"/>
     </application>
 
 </manifest>
