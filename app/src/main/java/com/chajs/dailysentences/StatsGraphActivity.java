@@ -209,7 +209,7 @@ public class StatsGraphActivity extends AppCompatActivity {
         xAxis.enableGridDashedLine(8, 24, 0);
 
         //xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisLable));
-        xAxis.setLabelCount(i);
+        xAxis.setLabelCount(i-1);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisLable));
 
 

@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("sentence", sentence);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 101, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        builder.setContentTitle("Daily Practice");
+        builder.setContentTitle("Daily Sentences");
         builder.setContentText(sentence.getKorSentence());
         builder.setSmallIcon(R.drawable.icon);
         builder.setAutoCancel(true);

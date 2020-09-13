@@ -80,13 +80,12 @@
 
                     <Button
                         android:id="@+id/buttonModify"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="bottom|right"
-                        android:layout_marginLeft="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="80dp"
                         android:layout_marginTop="0dp"
-                        android:background="@android:drawable/ic_menu_edit"
-                        android:text="수정"
+                        android:background="@drawable/ic_edit"
+                        android:textColor="#A96D6363"
                         android:textSize="15dp" />
                 </LinearLayout>
 
