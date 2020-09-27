@@ -37,14 +37,9 @@ public class MainActivity extends AppCompatActivity {
     Sentence sentence;
 
     Button btnInsert;
-    //Button btnShow;
-    //Button btnTestNoti;
     Button btnList;
-    //Button btnAlarmStart;
-    //Button btnAlarmStop;
     Button btnSettings;
     TextView txtNotiTime;
-    //static TextView txtAlarmStat;
     StringBuilder notiTimes;
 
     NotificationManager notificationManager;
@@ -79,33 +74,16 @@ public class MainActivity extends AppCompatActivity {
         myDb = new DatabaseHelper(this);
 
         btnInsert = (Button) findViewById(R.id.buttonInsert);
-        //btnShow = (Button) findViewById(R.id.buttonVeiwAll);
-        //btnTestNoti = (Button) findViewById(R.id.buttonNoti);
-        //btnTestNoti.setVisibility(View.INVISIBLE);
         btnList = (Button) findViewById(R.id.buttonLoadList);
-        //btnAlarmStart = (Button)findViewById(R.id.buttonAlarmStart);
-        //btnAlarmStop = (Button)findViewById(R.id.buttonAlarmStop);
         btnSettings = (Button)findViewById(R.id.buttonSettings);
-
-        //txtNotiTime = (TextView) findViewById(R.id.textViewNotiTime);
-
-        //txtAlarmStat = (TextView) findViewById(R.id.textViewAlramStat);
-
-        //alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
 
         //이벤트 함수
         OpenInsertActivity();
-        //OpenShowSentenceActivity();
         OpenListActivity();
         OpenSettingsActivity();
-        //TestNoti();
-        //AlarmStart();
-        //AlarmStop();
 
-        //알람 자동 실행
-        //AlarmRegister();
-
-
+        //초기 데이터 입력
+        InsertInitData();
     }
 
     /*
@@ -279,6 +257,21 @@ public class MainActivity extends AppCompatActivity {
         );
     }
      */
+
+    public void InsertInitData()
+    {
+        Log.d("InsertInitData", "before");
+        Cursor res = myDb.getAllData();
+        if(res.getCount() == 0) {
+            boolean isInserted = myDb.insertData("알람 설정을 하다. set the alarm", "반갑습니다. 공부했던 영어 문장들을 입력하고, 알람설정을 해주세요. 그러면 매일 영어 말하기 연습을 할 수 있습니다.",
+                    "Nice to meet you. Please enter the English sentences you studied and set the alarm. Then you can practice speaking English every day.",
+                    "2020/01/01", "9999/12/31"," " );
+            if(isInserted) {
+                Toast.makeText(this, "Init Data Inserted", Toast.LENGTH_LONG).show();
+            }
+        }
+        Log.d("InsertInitData", "after");
+    }
 
     public void showNotificationTest(Sentence sentence) {
         builder = null;

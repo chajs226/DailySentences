@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.sql.SQLInput;
 
@@ -29,7 +30,7 @@ import static com.chajs.dailysentences.ContactDBctrl.SET_TABLE_NAME;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Mysentences.db";
-    public static final int DB_VERSION = 10;
+    public static final int DB_VERSION = 11;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
@@ -45,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(ContactDBctrl.SQL_CREATE_TB_SETTINGS);
         db.execSQL(ContactDBctrl.SQL_CREATE_TB_STATHIS);
         db.execSQL(ContactDBctrl.SQL_CREATE_TB_RANDOMVALUES);
+
         Log.d("onCreate After: ", "after");
     }
 
@@ -55,6 +57,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+
+    public int CheckExistsData() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery(ContactDBctrl.SQL_CHECK_EXISTS_DATA, null);
+        return res.getInt(0);
     }
 
     @Override

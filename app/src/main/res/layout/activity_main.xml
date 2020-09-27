@@ -39,7 +39,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:gravity="center"
-                android:text="Daily Sentences"
+                android:text="매일 영어"
                 android:textColor="#6D6C6C"
                 android:textSize="35dp"
                 android:textStyle="bold" />

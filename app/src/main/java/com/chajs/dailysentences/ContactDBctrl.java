@@ -74,6 +74,9 @@ public class ContactDBctrl {
     // 테이블 존재 유무 확인
     public static final String SQL_CHECK_EXISTS_TABLE = "SELECT * FROM SQLITE_MASTER WHERE Name = " + TABLE_NAME;
 
+    //데이터 존재 유무 확인
+    public static final String SQL_CHECK_EXISTS_DATA = "SELECT COUNT(*) FROM " +  TABLE_NAME;
+
     public static final String SQL_SELECT_ALL_DATA = "SELECT ID, KEYWORD, KOR_SENTENCE, ENG_SENTENCE, START_DATE, END_DATE, POPUP_TIME, IFNULL(SUCCESS_COUNT,'0'), IFNULL(FAIL_COUNT,'0'), IFNULL(SKIP_COUNT,'0'), IFNULL(SUCCESS_COUNT,'0')*5 + IFNULL(FAIL_COUNT,'0')*-1 + IFNULL(SKIP_COUNT,'0')*-3 AS 'RATI'  FROM " + TABLE_NAME + " ORDER BY RATI DESC";
     //Noti 시간
     public static final String SQL_SELECT_NOTI_TIME = "SELECT ID, POPUP_TIME FROM " + TABLE_NAME + " WHERE strftime('%Y/%m/%d', 'now', 'localtime') BETWEEN START_DATE AND END_DATE";
